@@ -1,0 +1,8 @@
+{
+  "name": "JaliscoDriversLicenseTest",
+  "displayName": "Jalisco Driver's Test",
+  "splash": {
+    "image": "./src/assets/splash/splash.png",
+    "resizeMode": "cover"
+  }
+}

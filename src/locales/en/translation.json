@@ -1,0 +1,50 @@
+{
+  "bottom_navigation": {
+    "diary_tab": "Diary",
+    "today_tab": "Today",
+    "settings_tab": "Settings"
+  },
+  "diary_screen": {
+    "screen_title": "Diary"
+  },
+  "settings": {
+    "screen_title": "Settings",
+    "language": {
+      "title": "Language",
+      "options": {
+        "es": "Español",
+        "en": "English",
+        "ru": "Русский"
+      }
+    },
+    "themeMode": {
+      "title": "Theme",
+      "options": {
+        "system": "System",
+        "light": "Light",
+        "dark": "Dark"
+      }
+    }
+  },
+  "diary_meal": {
+    "category": {
+      "breakfast": "Breakfast",
+      "lunch": "Lunch",
+      "dinner": "Dinner",
+      "snack": "Snack"
+    }
+  },
+  "entry": {
+    "screen_title": "Meal",
+    "form": {
+      "name": "Name",
+      "name_placeholder": "Enter meal name",
+      "category": "Category",
+      "fulfillment": "Fulfillment",
+      "hunger": "Hunger",
+      "notes": "Notes",
+      "notes_placeholder": "Additional notes",
+      "submit_button": "Submit"
+    }
+  }
+}

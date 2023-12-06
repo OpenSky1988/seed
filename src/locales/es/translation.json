@@ -1,0 +1,50 @@
+{
+  "bottom_navigation": {
+    "diary_tab": "Diario",
+    "today_tab": "Hoy",
+    "settings_tab": "Configs"
+  },
+  "diary_screen": {
+    "screen_title": "Diario"
+  },
+  "settings": {
+    "screen_title": "Ajustes",
+    "language": {
+      "title": "Idioma",
+      "options": {
+        "es": "Español",
+        "en": "English",
+        "ru": "Русский"
+      }
+    },
+    "themeMode": {
+      "title": "Tema",
+      "options": {
+        "system": "Sistema",
+        "light": "Luz",
+        "dark": "Oscuro"
+      }
+    }
+  },
+  "diary_meal": {
+    "category": {
+      "breakfast": "Desayuno",
+      "lunch": "Almuerzo",
+      "dinner": "Cena",
+      "snack": "Merienda"
+    }
+  },
+  "entry": {
+    "screen_title": "Comida",
+    "form": {
+      "name": "Nombre",
+      "name_placeholder": "Introduce el nombre de la comida",
+      "category": "Categoría",
+      "fulfillment": "Satisfacción",
+      "hunger": "Hambre",
+      "notes": "Notas",
+      "notes_placeholder": "Notas adicionales",
+      "submit_button": "Enviar"
+    }
+  }
+}

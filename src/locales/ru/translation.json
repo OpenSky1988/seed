@@ -1,0 +1,50 @@
+{
+  "bottom_navigation": {
+    "diary_tab": "Дневник",
+    "today_tab": "Сегодня",
+    "settings_tab": "Настройки"
+  },
+  "diary_screen": {
+    "screen_title": "Дневник"
+  },
+  "settings": {
+    "screen_title": "Настройки",
+    "language": {
+      "title": "Язык",
+      "options": {
+        "es": "Español",
+        "en": "English",
+        "ru": "Русский"
+      }
+    },
+    "themeMode": {
+      "title": "Тема",
+      "options": {
+        "system": "Системная",
+        "light": "Светлая",
+        "dark": "Темная"
+      }
+    }
+  },
+  "diary_meal": {
+    "category": {
+      "breakfast": "Завтрак",
+      "lunch": "Обед",
+      "dinner": "Ужин",
+      "snack": "Перекус"
+    }
+  },
+  "entry": {
+    "screen_title": "Прием пищи",
+    "form": {
+      "name": "Название",
+      "name_placeholder": "Введите название блюда",
+      "category": "Категория",
+      "fulfillment": "Удовлетворенность",
+      "hunger": "Голод",
+      "notes": "Заметки",
+      "notes_placeholder": "Дополнительные заметки",
+      "submit_button": "Отправить"
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "Seed",
+  "displayName": "Seed",
+  "splash": {
+    "image": "./src/assets/splash/splash.png",
+    "resizeMode": "cover"
+  }
+}
