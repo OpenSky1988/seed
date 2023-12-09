@@ -22,7 +22,7 @@
       "options": {
         "system": "Системная",
         "light": "Светлая",
-        "dark": "Темная"
+        "dark": "Тёмная"
       }
     }
   },
@@ -35,16 +35,23 @@
     }
   },
   "entry": {
-    "screen_title": "Прием пищи",
+    "screen_title": "Приём пищи",
     "form": {
       "name": "Название",
       "name_placeholder": "Введите название блюда",
       "category": "Категория",
-      "fulfillment": "Удовлетворенность",
+      "fulfillment": "Удовлетворённость",
       "hunger": "Голод",
       "notes": "Заметки",
       "notes_placeholder": "Дополнительные заметки",
       "submit_button": "Отправить"
+    },
+    "photo_capture": {
+      "action_sheet": {
+        "take_photo": "Сделать Фото",
+        "pick_from_gallery": "Выбрать из Галереи",
+        "cancel": "Отмена"
+      }
     }
   }
 }

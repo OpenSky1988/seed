@@ -8,6 +8,7 @@ import DiaryDay from '../screens/DiaryDay';
 import Settings from '../screens/Settings';
 import Diary from '../screens/Diary';
 import Entry from '../screens/Entry';
+import { TRootStackParamList } from '../types';
 
 const { Navigator, Screen } = createBottomTabNavigator<TRootStackParamList>();
 
@@ -47,6 +48,7 @@ const TabBarNavigation: React.FC<BottomTabBarProps> = (props) => <BottomTabBar {
 const TabNavigator = () => (
   <ThemedSafeAreaView>
     <Navigator
+      backBehavior="history"
       initialRouteName="Today"
       screenOptions={{ headerShown: false }}
       tabBar={TabBarNavigation}

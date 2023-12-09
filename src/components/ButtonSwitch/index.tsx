@@ -1,73 +1,75 @@
+import { Button, Text, withStyles } from '@ui-kitten/components';
 import React from 'react';
-import { StyleSheet, View, ViewProps, ViewStyle } from 'react-native';
-import { ButtonElement } from '@ui-kitten/components';
+import { View } from 'react-native';
 
-interface ButtonSwitchProps extends ViewProps {
-  fullWidth?: boolean;
-  children: ButtonElement[];
-  selectedIndex: number;
-  onSelect: (index: number) => void;
-}
+import styles from './styles';
+import type { IButtonSwitchProps, ILevelButtonSwitchProps } from './types';
 
-export type ButtonSwitchElement = React.ReactElement<ButtonSwitchProps>;
-
-const STATUS_DEFAULT: string = 'basic';
-const STATUS_SELECTED: string = 'primary';
-
-export class ButtonSwitch extends React.Component<ButtonSwitchProps> {
-  private get childCount(): number {
-    return React.Children.count(this.props.children);
-  }
-
-  private getBorderStyleForPosition = (index: number): ViewStyle => {
-    switch (index) {
-      case 0: return styles.firstButton;
-      case this.childCount - 1: return styles.lastButton;
-      default: return styles.middleButton;
-    }
+const ButtonSwitchBase: React.FC<IButtonSwitchProps> = ({
+  children,
+  eva,
+  fullWidth,
+  label,
+  onSelect,
+  selectedIndex,
+  style,
+  ...buttonSwitchProps
+}) => {
+  const getBorderStyleForPosition = (index: number, count: number) => {
+    if (index === 0) return eva.style.firstButton;
+    if (index === count - 1) return eva.style.lastButton;
+    return eva.style.middleButton;
   };
 
-  private renderComponentChildren = (children: ButtonElement[]): ButtonElement[] => {
-    return React.Children.map(children, (element: ButtonElement, index: number): ButtonElement => {
-    const borderStyle: ViewStyle = this.getBorderStyleForPosition(index);
+  const renderButtons = () => {
+    return children.map((childComponent, index) => {
+      const { props: { style, ...childProps } } = childComponent;
 
-      return React.cloneElement(element, {
-        style: [element.props.style, borderStyle, this.props.fullWidth && styles.buttonFullWidth],
-        status: index === this.props.selectedIndex ? STATUS_SELECTED : STATUS_DEFAULT,
-        onPress: () => this.props.onSelect(index),
-      });
+      const borderStyle = getBorderStyleForPosition(index, children.length);
+      const isSelected = index === selectedIndex;
+
+      const handlePress = () => onSelect(index);
+
+      return (
+        <childComponent.type
+          {...childProps}
+          key={childComponent.props.children}
+          style={[style, borderStyle, fullWidth && eva.style.buttonFullWidth]}
+          status={isSelected ? 'primary' : 'basic'}
+          onPress={handlePress}
+        />
+      );
     });
   };
 
-  public render(): React.ReactElement<ViewProps> {
-    const { style, children, ...viewProps } = this.props;
-    return (
-      <View
-        {...viewProps}
-        style={[styles.container, style]}>
-        {this.renderComponentChildren(children)}
+  return (
+    <View style={eva.style.container}>
+      <Text category='label' style={eva.style.levelLabel}>{label}</Text>
+      <View {...buttonSwitchProps} style={[eva.style.switchContainer, style]}>
+        {renderButtons()}
       </View>
-    );
-  }
-}
+    </View>
+  );
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  firstButton: {
-    borderTopEndRadius: 0,
-    borderBottomEndRadius: 0,
-  },
-  middleButton: {
-    borderRadius: 0,
-  },
-  lastButton: {
-    borderTopStartRadius: 0,
-    borderBottomStartRadius: 0,
-  },
-  buttonFullWidth: {
-    flex: 1,
-  },
-});
+const ThemedButtonSwitch = withStyles(ButtonSwitchBase, styles);
+
+const ButtonSwitch: React.FC<ILevelButtonSwitchProps> = ({
+  label,
+  levels,
+  selectedIndex,
+  setSelectedIndex,
+}) => (
+  <ThemedButtonSwitch
+    label={label}
+    fullWidth
+    onSelect={setSelectedIndex}
+    selectedIndex={selectedIndex}
+  >
+    {levels.map((level) => (
+      <Button key={level}>{level.toString()}</Button>
+    ))}
+  </ThemedButtonSwitch>
+);
+
+export default ButtonSwitch;

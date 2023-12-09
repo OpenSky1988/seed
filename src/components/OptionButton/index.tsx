@@ -10,7 +10,7 @@ import {
   increaseWrongAnswersInDeviceStorage,
 } from '../../screens/Entry/utils';
 import { RootState } from '../../store';
-import { updateAnswer } from '../../store/slices/questions';
+import { updateAnswer } from '../../store/slices/diary';
 import styles from './styles';
 import { IOptionButtonProps } from './types';
 

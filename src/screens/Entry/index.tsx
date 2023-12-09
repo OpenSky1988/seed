@@ -1,144 +1,134 @@
 import React, { useCallback, useState } from 'react';
+import { Button, Input, Layout, IndexPath, Select, SelectItem, TopNavigation, Text, withStyles } from '@ui-kitten/components';
 import { useTranslation } from 'react-i18next';
-import { ScrollView, StyleSheet, Modal, TextProps, View } from 'react-native';
-import { Button, Input, Layout, IndexPath, Select, SelectItem, TopNavigation, Text } from '@ui-kitten/components';
-import DateTimePicker from '@react-native-community/datetimepicker';
+import { ScrollView, TextProps } from 'react-native';
+import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import { useSelector } from 'react-redux';
 
+import styles from './styles';
 import { TNavigationProps } from './types';
 import { IDiaryEntry } from '../DiaryDay/types';
-import ThemedSafeAreaView from '../../components/ThemedSafeAreaView';
-import { useBackAction } from '../../utils/hooks';
-import { MEAL_CATEGORIES } from '../../constants';
-import { ButtonSwitch } from '../../components/ButtonSwitch';
+import ButtonSwitch from '../../components/ButtonSwitch';
 import PhotoCapture from '../../components/PhotoCapture';
+import ThemedSafeAreaView from '../../components/ThemedSafeAreaView';
+import { MEAL_CATEGORIES } from '../../constants';
+import { RootState } from '../../store';
+import { useBackAction } from '../../utils/hooks';
 
 const Title: React.FC<TextProps> = () => {
   const { t } = useTranslation();
 
-  return <Text category='h6'>{t('entry_screen.screen_title')}</Text>
+  return <Text category='h6'>{t('entry.screen_title')}</Text>
 };
 
-const Entry: React.FC<TNavigationProps> = ({ route }) => {
+const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
+  const { t } = useTranslation();
+  
   const diaryEntry: IDiaryEntry = route.params;
+  const sensationLevels = [1, 2, 3, 4, 5];
+  const mealCategories = [
+    t('diary_meal.category.breakfast'),
+    t('diary_meal.category.lunch'),
+    t('diary_meal.category.dinner'),
+    t('diary_meal.category.snack'),
+  ];
 
-  const [imageUri, setImageUri] = useState<string>(diaryEntry.imageUri);
   const [category, setCategory] = useState<IndexPath>(new IndexPath(MEAL_CATEGORIES.indexOf(diaryEntry.category)));
-  const [date, setDate] = useState<Date>(new Date(diaryEntry.created_at));
-  const [time, setTime] = useState<Date>(new Date(`2021-01-01T${diaryEntry.time}:00`));
+  const [dateTime, setDateTime] = useState<Date>(new Date(diaryEntry.created_at));
   const [fulfillmentIndex, setFulfillmentIndex] = useState<number>(diaryEntry.fulfillment - 1);
   const [hungerIndex, setHungerIndex] = useState<number>(diaryEntry.hunger - 1);
+  const [imageUri, setImageUri] = useState<string | undefined>(diaryEntry.imageUri);
+  const [isDateTimePickerVisible, setIsDateTimePickerVisible] = useState<boolean>(false);
   const [name, setName] = useState<string>(diaryEntry.name);
   const [notes, setNotes] = useState<string>(diaryEntry.notes);
-  const [isDateTimePickerVisible, setDateTimePickerVisible] = useState<boolean>(false);
 
-  const { t } = useTranslation();
+  const { language } = useSelector((state: RootState) => state.settings);
   const BackAction = useBackAction();
 
-  const displayDateTime = `${date.toLocaleDateString()} ${time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+  const TitleMemoized = useCallback(() => <Title />, []);
+  const displayDateTime = `${dateTime.toLocaleDateString()} ${dateTime.toLocaleTimeString()}`;
 
-  const renderLevelButtonSwitch = (selectedIndex: number, setSelectedIndex: (index: number) => void) => (
-    <ButtonSwitch
-      onSelect={setSelectedIndex}
-      selectedIndex={selectedIndex}
-      fullWidth
-    >
-      {[1, 2, 3, 4, 5].map((level, index) => (
-        <Button key={index}>{level.toString()}</Button>
-      ))}
-    </ButtonSwitch>
-  );
-
-  const handlePhotoTaken = (uri: string) => {
-    setImageUri(uri);
+  const handleConfirmDateTime = (date: Date) => {
+    setDateTime(date);
+    setIsDateTimePickerVisible(false);
   };
+
+  const handlePhotoTaken = (uri: string) => setImageUri(uri);
+  const handleSelectCategory = (index: IndexPath | IndexPath[]) => setCategory(index as IndexPath);
+  const showDateTimePicker = () => setIsDateTimePickerVisible(true);
+  const hideDateTimePicker = () => setIsDateTimePickerVisible(false);
 
   return (
     <ThemedSafeAreaView>
       <TopNavigation
-        title={t('entry.screen_title')}
-        alignment="center"
         accessoryLeft={BackAction}
+        alignment="center"
+        title={TitleMemoized}
       />
-      <ScrollView style={styles.container}>
-        <Layout style={styles.layout}>
+      <ScrollView style={eva.style.container}>
+        <Layout style={eva.style.layout}>
           <PhotoCapture onPhotoTaken={handlePhotoTaken} />
           <Input
             label={t('entry.form.name')}
-            placeholder={t('entry.form.name_placeholder')}
-            value={name}
             onChangeText={setName}
-            style={styles.input}
+            placeholder={t('entry.form.name_placeholder')}
+            style={eva.style.input}
+            value={name}
           />
 
           <Select
             label={t('entry.form.category')}
+            onSelect={handleSelectCategory}
             selectedIndex={category}
-            onSelect={index => setCategory(index as IndexPath)}
-            value={[
-              t('diary_meal.category.breakfast'),
-              t('diary_meal.category.lunch'),
-              t('diary_meal.category.dinner'),
-              t('diary_meal.category.snack'),
-            ][category.row]}
-            style={styles.input}
+            style={eva.style.input}
+            value={mealCategories[category.row]}
           >
-            <SelectItem title={t('diary_meal.category.breakfast')} />
-            <SelectItem title={t('diary_meal.category.lunch')} />
-            <SelectItem title={t('diary_meal.category.dinner')} />
-            <SelectItem title={t('diary_meal.category.snack')} />
+            {mealCategories.map((mealCategory) => (
+              <SelectItem key={mealCategory} title={mealCategory} />
+            ))}
           </Select>
 
-          <Button onPress={() => setDateTimePickerVisible(true)} style={styles.input}>
+          <ButtonSwitch
+            label={t('entry.form.fulfillment')}
+            levels={sensationLevels}
+            selectedIndex={fulfillmentIndex}
+            setSelectedIndex={setFulfillmentIndex}
+          />
+          <ButtonSwitch
+            label={t('entry.form.hunger')}
+            levels={sensationLevels}
+            selectedIndex={hungerIndex}
+            setSelectedIndex={setHungerIndex}
+          />
+
+          <Button
+            onPress={showDateTimePicker}
+            style={[eva.style.input, eva.style.button]}
+          >
             {displayDateTime}
           </Button>
-
-          <Modal
-            visible={isDateTimePickerVisible}
-            transparent={true}
-            animationType="slide"
-          >
-            <View style={styles.modalView}>
-              <DateTimePicker
-                value={date}
-                mode="date"
-                display="default"
-                onChange={(event, selectedDate) => {
-                  const currentDate = selectedDate ?? date;
-                  setDate(currentDate);
-                }}
-              />
-              <DateTimePicker
-                value={time}
-                mode="time"
-                display="default"
-                onChange={(event, selectedTime) => {
-                  const currentTime = selectedTime ?? time;
-                  setTime(currentTime);
-                }}
-              />
-              <Button onPress={() => setDateTimePickerVisible(false)}>Done</Button>
-            </View>
-          </Modal>
-
-          <Text category='s1' style={styles.levelLabel}>{t('entry.form.fulfillment')}</Text>
-          {renderLevelButtonSwitch(fulfillmentIndex, setFulfillmentIndex)}
-
-          <Text category='s1' style={styles.levelLabel}>{t('entry.form.hunger')}</Text>
-          {renderLevelButtonSwitch(hungerIndex, setHungerIndex)}
+          <DateTimePickerModal
+            date={dateTime}
+            isVisible={isDateTimePickerVisible}
+            locale={language}
+            mode="datetime"
+            onCancel={hideDateTimePicker}
+            onConfirm={handleConfirmDateTime}
+          />
 
           <Input
             label={t('entry.form.notes')}
-            placeholder={t('entry.form.notes_placeholder')}
-            value={notes}
-            onChangeText={setNotes}
             multiline={true}
+            onChangeText={setNotes}
+            placeholder={t('entry.form.notes_placeholder')}
+            style={eva.style.input}
             textStyle={{ minHeight: 64 }}
-            style={styles.input}
+            value={notes}
           />
 
           <Button
             onPress={() => console.log('Submit logic here')}
-            style={styles.input}
+            style={[eva.style.input, eva.style.button]}
           >
             {t('entry.form.submit_button')}
           </Button>
@@ -148,47 +138,6 @@ const Entry: React.FC<TNavigationProps> = ({ route }) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  layout: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-  },
-  input: {
-    width: '100%',
-    marginVertical: 8,
-  },
-  levelGroup: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginVertical: 8,
-  },
-  levelLabel: {
-    alignSelf: 'flex-start',
-    marginLeft: 15,
-    marginTop: 10,
-  },
-  modalView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: '50%',
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 20,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5
-  },
-});
+const ThemedEntry = withStyles(Entry, styles);
 
-export default Entry;
+export default ThemedEntry;

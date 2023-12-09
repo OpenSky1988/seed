@@ -1,5 +1,6 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { TRootStackParamList } from '../../types';
 
-type TProps = NativeStackScreenProps<TRootStackParamList, 'Diary'>;
+type TNavigationProps = NativeStackScreenProps<TRootStackParamList, 'Diary'>;
 
-export type { TProps };
+export type { TNavigationProps };

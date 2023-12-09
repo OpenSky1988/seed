@@ -6,12 +6,12 @@ import DateDisplay from '../../components/DateDisplay';
 import MealButton from '../../components/MealButton';
 import data from '../../data/diary';
 import styles from './styles';
-import type { TProps } from './types';
+import type { TNavigationProps } from './types';
 import { formatDate } from './utils';
 
 const CalendarIcon = (props: IconProps) => <Icon {...props} name='plus' />;
 
-const DiaryDay: React.FC<TProps> = (navigationProps) => {
+const DiaryDay: React.FC<TNavigationProps> = (navigationProps) => {
   const day = navigationProps.route.params?.day ?? '2023-11-28T00:00:00';
   const date = day ? new Date(day) : new Date();
   const formattedToday = formatDate(date);

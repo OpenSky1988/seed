@@ -1,53 +1,69 @@
+import { useActionSheet } from '@expo/react-native-action-sheet';
+import { Icon, IconProps, withStyles } from '@ui-kitten/components';
 import React, { useState } from 'react';
-import { View, Button, Image, StyleSheet } from 'react-native';
-import { launchCamera } from 'react-native-image-picker';
+import { useTranslation } from 'react-i18next';
+import { View, ImageBackground, TouchableOpacity } from 'react-native';
 
-const PhotoCapture = ({ onPhotoTaken }) => {
-  const [imageUri, setImageUri] = useState(null);
+import type { IPhotoCapture } from './types';
+import { handleSelectPhoto, handleTakePhoto } from './utils';
+import { cameraIconStyles, styles } from './styles';
 
-  const handleTakePhoto = () => {
-    const options = {
-      cameraType: 'back',
-      saveToPhotos: true,
-      mediaType: 'photo',
-    };
+const CameraIcon: React.FC<IconProps> = ({ eva, hasImage, ...restProps }) => (
+  hasImage || <Icon
+    {...restProps}
+    style={eva.style.cameraIcon}
+    fill={eva.style.cameraIcon.fill}
+    name="camera-outline"
+  />
+);
 
-    launchCamera(options, (response) => {
-      if (response.didCancel) {
-        console.log('User cancelled image capture');
-      } else if (response.errorCode) {
-        console.log('ImagePicker Error: ', response.errorMessage);
-      } else {
-        const source = { uri: response.uri };
-        setImageUri(source.uri);
-        if (onPhotoTaken) {
-          onPhotoTaken(source.uri);
-        }
+const ThemedCameraIcon = withStyles(CameraIcon, cameraIconStyles);
+
+const PhotoCapture: React.FC<IPhotoCapture> = ({ eva, onPhotoTaken }) => {
+  const [imageUri, setImageUri] = useState<string | undefined>();
+
+  const { showActionSheetWithOptions } = useActionSheet();
+  const { t } = useTranslation();
+
+  const handleOpenActionSheet = () => {
+    const options = [
+      t('entry.photo_capture.action_sheet.take_photo'),
+      t('entry.photo_capture.action_sheet.pick_from_gallery'),
+      t('entry.photo_capture.action_sheet.cancel'),
+    ];
+    const cancelButtonIndex = 2;
+
+    showActionSheetWithOptions({
+      options,
+      cancelButtonIndex,
+    }, (selectedIndex?: number) => {
+      switch (selectedIndex) {
+        case 0:
+          handleTakePhoto(setImageUri, onPhotoTaken);
+          break;
+
+        case 1:
+          handleSelectPhoto(setImageUri, onPhotoTaken);
+          break;
       }
     });
   };
 
   return (
     <View>
-      {imageUri && (
-        <Image
+      <TouchableOpacity onPress={handleOpenActionSheet} style={{ width: '100%' }}>
+        <ImageBackground
+          imageStyle={{ borderRadius: eva.style.preview.borderRadius }}
           source={{ uri: imageUri }}
-          style={styles.preview}
-        />
-      )}
-      <Button title="Take Photo" onPress={handleTakePhoto} />
+          style={eva.style.preview}
+        >
+          <ThemedCameraIcon hasImage={!!imageUri} />
+        </ImageBackground>
+      </TouchableOpacity>
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  preview: {
-    width: 300,
-    height: 300,
-    marginBottom: 20,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
+const ThemedPhotoCapture = withStyles(PhotoCapture, styles);
 
-export default PhotoCapture;
+export default ThemedPhotoCapture;

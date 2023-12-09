@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import * as eva from '@eva-design/eva';
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { NavigationContainer } from '@react-navigation/native';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
@@ -21,9 +22,11 @@ const App: React.FC = () => {
     <>
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={theme}>
-        <NavigationContainer>
-          <TabNavigator />
-        </NavigationContainer>
+        <ActionSheetProvider>
+          <NavigationContainer>
+            <TabNavigator />
+          </NavigationContainer>
+        </ActionSheetProvider>
       </ApplicationProvider>
     </>
   );

@@ -1,6 +1,6 @@
-import { IDiary } from "../../screens/DiaryDay/types";
+import { IDiaryDay } from "../../screens/DiaryDay/types";
 
-const data: IDiary = {
+const data: IDiaryDay = {
   '2023-11-28T00:00:00': [
     {
       name: 'Trigo sarraceno con verduras',

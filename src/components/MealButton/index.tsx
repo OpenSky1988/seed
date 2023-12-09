@@ -20,21 +20,12 @@ const MealButton: React.FC<TMealButton> = ({ diaryEntry, navigation }) => {
         style={[styles.mealButton, { backgroundColor: theme['color-primary-500'] }]}
       >
         <View style={styles.mealButtonTitleContainer}>
-          <Text style={{
-            ...styles.mealButtonCategory,
-            ...styles.buttonText,
-          }}>{t(`diary_meal.category.${category}`)}</Text>
-          <Text style={{
-            ...styles.mealButtonTime,
-            ...styles.buttonText,
-          }}>{time}</Text>
+          <Text style={[ styles.mealButtonCategory, styles.buttonText ]}>{t(`diary_meal.category.${category}`)}</Text>
+          <Text style={[ styles.mealButtonTime, styles.buttonText ]}>{time}</Text>
         </View>
-        <Text style={{
-          ...styles.mealButtonName,
-          ...styles.buttonText,
-        }}>• {name}</Text>
+        <Text style={[ styles.mealButtonName, styles.buttonText ]}>• {name}</Text>
         {!!notes &&
-          <View  style={styles.mealButtonNotesContainer}>
+          <View style={styles.mealButtonNotesContainer}>
             <Text style={styles.mealButtonNotes}>{notes}</Text>
           </View>
         }

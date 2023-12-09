@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
-import questions from './slices/questions';
+import diary from './slices/diary';
+import diaryDay from './slices/diaryDay';
 import settings from './slices/settings';
 
 export const store = configureStore({
   reducer: {
-    questions,
+    diary,
+    diaryDay,
     settings,
   },
 });

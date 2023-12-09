@@ -45,6 +45,13 @@
       "notes": "Notas",
       "notes_placeholder": "Notas adicionales",
       "submit_button": "Enviar"
+    },
+    "photo_capture": {
+      "action_sheet": {
+        "take_photo": "Tomar Foto",
+        "pick_from_gallery": "Elegir de la Galería",
+        "cancel": "Cancelar"
+      }
     }
   }
 }

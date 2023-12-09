@@ -5,7 +5,7 @@ import { Icon, IconProps, TopNavigationAction } from '@ui-kitten/components';
 import { store } from '../../async-storage';
 import { DEVICE_STORE_KEYS } from '../../async-storage/deviceStoreKeys';
 import { RootState } from '../../store';
-import { setFavorites } from '../../store/slices/questions';
+import { setFavorites } from '../../store/slices/diary';
 
 const useBookmarkAction = (currentQuestionId: number, isBookmarked: boolean) => {
   const dispatch = useDispatch();

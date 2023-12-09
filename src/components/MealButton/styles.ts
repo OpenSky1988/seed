@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   mealButtonNotesContainer: {
-    backgroundColor: COLORS.error,
+    backgroundColor: '#A767B5',
     borderRadius: 16,
     paddingHorizontal: 12,
     paddingVertical: 6,
