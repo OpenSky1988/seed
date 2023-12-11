@@ -3,7 +3,7 @@ import React from 'react';
 import { View } from 'react-native';
 
 import styles from './styles';
-import type { IButtonSwitchProps, ILevelButtonSwitchProps } from './types';
+import type { IButtonSwitchProps, ILevelButtonSwitchProps, TButtonSwitchItemProps } from './types';
 
 const ButtonSwitchBase: React.FC<IButtonSwitchProps> = ({
   children,
@@ -16,9 +16,9 @@ const ButtonSwitchBase: React.FC<IButtonSwitchProps> = ({
   ...buttonSwitchProps
 }) => {
   const getBorderStyleForPosition = (index: number, count: number) => {
-    if (index === 0) return eva.style.firstButton;
-    if (index === count - 1) return eva.style.lastButton;
-    return eva.style.middleButton;
+    if (index === 0) return eva?.style?.firstButton;
+    if (index === count - 1) return eva?.style?.lastButton;
+    return eva?.style?.middleButton;
   };
 
   const renderButtons = () => {
@@ -33,19 +33,24 @@ const ButtonSwitchBase: React.FC<IButtonSwitchProps> = ({
       return (
         <childComponent.type
           {...childProps}
-          key={childComponent.props.children}
-          style={[style, borderStyle, fullWidth && eva.style.buttonFullWidth]}
-          status={isSelected ? 'primary' : 'basic'}
+          key={`${label}-${index}`}
           onPress={handlePress}
+          status={isSelected ? 'primary' : 'basic'}
+          style={[
+            style,
+            borderStyle,
+            fullWidth && eva?.style?.buttonFullWidth,
+            isSelected || eva?.style?.unselectedButton,
+          ]}
         />
       );
     });
   };
 
   return (
-    <View style={eva.style.container}>
-      <Text category='label' style={eva.style.levelLabel}>{label}</Text>
-      <View {...buttonSwitchProps} style={[eva.style.switchContainer, style]}>
+    <View style={eva?.style?.container}>
+      <Text category='label' style={eva?.style?.levelLabel}>{label}</Text>
+      <View {...buttonSwitchProps} style={[eva?.style?.switchContainer, style]}>
         {renderButtons()}
       </View>
     </View>
@@ -53,6 +58,18 @@ const ButtonSwitchBase: React.FC<IButtonSwitchProps> = ({
 };
 
 const ThemedButtonSwitch = withStyles(ButtonSwitchBase, styles);
+
+const CustomText: React.FC<TButtonSwitchItemProps> = ({
+  children,
+  eva,
+  evaProps,
+}) => (
+  <Text {...evaProps} style={eva?.style?.unselectedButtonText}>
+    {children}
+  </Text>
+);
+
+const ThemedText = withStyles(CustomText, styles);
 
 const ButtonSwitch: React.FC<ILevelButtonSwitchProps> = ({
   label,
@@ -66,8 +83,13 @@ const ButtonSwitch: React.FC<ILevelButtonSwitchProps> = ({
     onSelect={setSelectedIndex}
     selectedIndex={selectedIndex}
   >
-    {levels.map((level) => (
-      <Button key={level}>{level.toString()}</Button>
+    {levels.map((level, i) => (
+      <Button key={`${label}-${level}`}>
+        {i === selectedIndex
+          ? level.toString()
+          : (evaProps) => <ThemedText evaProps={evaProps}>{level.toString()}</ThemedText>
+        }
+      </Button>
     ))}
   </ThemedButtonSwitch>
 );

@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { store } from '../../async-storage';
+import { TLanguage, TThemeMode } from '../../types';
 
 interface SettingsState {
   language: TLanguage;

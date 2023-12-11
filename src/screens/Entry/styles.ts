@@ -1,4 +1,6 @@
-const styles = (theme) => ({
+import { ThemeType } from '@ui-kitten/components';
+
+const styles = (theme: ThemeType) => ({
   container: {
     flex: 1,
   },

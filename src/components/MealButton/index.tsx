@@ -16,7 +16,7 @@ const MealButton: React.FC<TMealButton> = ({ diaryEntry, navigation }) => {
   return (
     <TouchableOpacity onPress={navigate}>
       <ImageBackground
-        source={{ uri: imageUri }}
+        source={{ uri: imageUri ?? null }}
         style={[styles.mealButton, { backgroundColor: theme['color-primary-500'] }]}
       >
         <View style={styles.mealButtonTitleContainer}>

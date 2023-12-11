@@ -1,3 +1,4 @@
+import { TLanguage, TMealCategories, TThemeMode } from '../types';
 import { COLORS, SIZES } from './theme';
 
 const LANGUAGES: TLanguage[] = ['es', 'en', 'ru'];

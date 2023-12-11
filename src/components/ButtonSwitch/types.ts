@@ -1,6 +1,7 @@
+import { TextProps, ThemedComponentProps } from '@ui-kitten/components';
 import { ViewProps } from 'react-native';
 
-interface IButtonSwitchProps extends ViewProps {
+type IButtonSwitchProps = ViewProps & ThemedComponentProps<{}> & {
   fullWidth?: boolean;
   children: React.ReactElement[];
   label: string;
@@ -15,4 +16,8 @@ interface ILevelButtonSwitchProps {
   label: string;
 }
 
-export type { IButtonSwitchProps, ILevelButtonSwitchProps };
+type TButtonSwitchItemProps = TextProps & ThemedComponentProps<{}> & {
+  evaProps: TextProps | undefined;
+};
+
+export type { IButtonSwitchProps, TButtonSwitchItemProps, ILevelButtonSwitchProps };

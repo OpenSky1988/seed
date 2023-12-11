@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux';
 
 import styles from './styles';
 import { TNavigationProps } from './types';
-import { IDiaryEntry } from '../DiaryDay/types';
 import ButtonSwitch from '../../components/ButtonSwitch';
 import PhotoCapture from '../../components/PhotoCapture';
 import ThemedSafeAreaView from '../../components/ThemedSafeAreaView';
@@ -24,7 +23,7 @@ const Title: React.FC<TextProps> = () => {
 const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
   const { t } = useTranslation();
   
-  const diaryEntry: IDiaryEntry = route.params;
+  const diaryEntry = route.params;
   const sensationLevels = [1, 2, 3, 4, 5];
   const mealCategories = [
     t('diary_meal.category.breakfast'),
@@ -33,14 +32,14 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
     t('diary_meal.category.snack'),
   ];
 
-  const [category, setCategory] = useState<IndexPath>(new IndexPath(MEAL_CATEGORIES.indexOf(diaryEntry.category)));
-  const [dateTime, setDateTime] = useState<Date>(new Date(diaryEntry.created_at));
-  const [fulfillmentIndex, setFulfillmentIndex] = useState<number>(diaryEntry.fulfillment - 1);
-  const [hungerIndex, setHungerIndex] = useState<number>(diaryEntry.hunger - 1);
-  const [imageUri, setImageUri] = useState<string | undefined>(diaryEntry.imageUri);
+  const [category, setCategory] = useState<IndexPath>(new IndexPath(MEAL_CATEGORIES.indexOf(diaryEntry?.category ?? 'breakfast')));
+  const [dateTime, setDateTime] = useState<Date>(new Date(diaryEntry?.created_at ?? ''));
+  const [fulfillmentIndex, setFulfillmentIndex] = useState<number>((diaryEntry?.fulfillment ?? 1) - 1);
+  const [hungerIndex, setHungerIndex] = useState<number>((diaryEntry?.hunger ?? 1) - 1);
+  const [imageUri, setImageUri] = useState<string | undefined>(diaryEntry?.imageUri);
   const [isDateTimePickerVisible, setIsDateTimePickerVisible] = useState<boolean>(false);
-  const [name, setName] = useState<string>(diaryEntry.name);
-  const [notes, setNotes] = useState<string>(diaryEntry.notes);
+  const [name, setName] = useState<string>(diaryEntry?.name ?? '');
+  const [notes, setNotes] = useState<string>(diaryEntry?.notes ?? '');
 
   const { language } = useSelector((state: RootState) => state.settings);
   const BackAction = useBackAction();
@@ -65,14 +64,14 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
         alignment="center"
         title={TitleMemoized}
       />
-      <ScrollView style={eva.style.container}>
-        <Layout style={eva.style.layout}>
+      <ScrollView style={eva?.style?.container}>
+        <Layout style={eva?.style?.layout}>
           <PhotoCapture onPhotoTaken={handlePhotoTaken} />
           <Input
             label={t('entry.form.name')}
             onChangeText={setName}
             placeholder={t('entry.form.name_placeholder')}
-            style={eva.style.input}
+            style={eva?.style?.input}
             value={name}
           />
 
@@ -80,7 +79,7 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
             label={t('entry.form.category')}
             onSelect={handleSelectCategory}
             selectedIndex={category}
-            style={eva.style.input}
+            style={eva?.style?.input}
             value={mealCategories[category.row]}
           >
             {mealCategories.map((mealCategory) => (
@@ -103,7 +102,7 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
 
           <Button
             onPress={showDateTimePicker}
-            style={[eva.style.input, eva.style.button]}
+            style={[eva?.style?.input, eva?.style?.button]}
           >
             {displayDateTime}
           </Button>
@@ -121,14 +120,14 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
             multiline={true}
             onChangeText={setNotes}
             placeholder={t('entry.form.notes_placeholder')}
-            style={eva.style.input}
+            style={eva?.style?.input}
             textStyle={{ minHeight: 64 }}
             value={notes}
           />
 
           <Button
             onPress={() => console.log('Submit logic here')}
-            style={[eva.style.input, eva.style.button]}
+            style={[eva?.style?.input, eva?.style?.button]}
           >
             {t('entry.form.submit_button')}
           </Button>

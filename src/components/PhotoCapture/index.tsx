@@ -11,8 +11,8 @@ import { cameraIconStyles, styles } from './styles';
 const CameraIcon: React.FC<IconProps> = ({ eva, hasImage, ...restProps }) => (
   hasImage || <Icon
     {...restProps}
-    style={eva.style.cameraIcon}
-    fill={eva.style.cameraIcon.fill}
+    style={eva?.style?.cameraIcon}
+    fill={eva?.style?.cameraIcon.fill}
     name="camera-outline"
   />
 );
@@ -53,9 +53,9 @@ const PhotoCapture: React.FC<IPhotoCapture> = ({ eva, onPhotoTaken }) => {
     <View>
       <TouchableOpacity onPress={handleOpenActionSheet} style={{ width: '100%' }}>
         <ImageBackground
-          imageStyle={{ borderRadius: eva.style.preview.borderRadius }}
+          imageStyle={{ borderRadius: eva?.style?.preview.borderRadius }}
           source={{ uri: imageUri }}
-          style={eva.style.preview}
+          style={eva?.style?.preview}
         >
           <ThemedCameraIcon hasImage={!!imageUri} />
         </ImageBackground>

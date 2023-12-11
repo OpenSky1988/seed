@@ -1,4 +1,6 @@
-const cameraIconStyles = (theme) => ({
+import { ThemeType } from '@ui-kitten/components';
+
+const cameraIconStyles = (theme: ThemeType) => ({
   cameraIcon: {
     fill: theme['text-hint-color'],
     height: 68,
@@ -6,7 +8,7 @@ const cameraIconStyles = (theme) => ({
   },
 });
 
-const styles = (theme) => ({
+const styles = (theme: ThemeType) => ({
   preview: {
     borderRadius: 16,
     borderWidth: 1,

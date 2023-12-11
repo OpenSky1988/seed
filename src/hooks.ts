@@ -7,6 +7,7 @@ import { get } from './async-storage';
 import { LANGUAGES } from './constants';
 import { RootState } from './store';
 import { setLanguage, setThemeMode } from './store/slices/settings';
+import { TLanguage } from './types';
 
 const useLocale = () => {
   const { i18n } = useTranslation();

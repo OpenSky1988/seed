@@ -1,5 +1,6 @@
 import * as eva from '@eva-design/eva';
 import theme from './custom-theme.json';
+import { TThemeMode } from '../types';
 
 const darkColorOverrides = {
   'background-basic-color-1': '#012224',

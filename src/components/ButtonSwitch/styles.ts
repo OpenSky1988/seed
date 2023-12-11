@@ -1,4 +1,6 @@
-const styles = (theme) => ({
+import { ThemeType } from '@ui-kitten/components';
+
+const styles = (theme: ThemeType) => ({
   container: {
     marginVertical: 6,
     width: '100%',
@@ -19,6 +21,13 @@ const styles = (theme) => ({
     borderRadius: 16,
     borderTopStartRadius: 0,
     borderBottomStartRadius: 0,
+  },
+  unselectedButton: {
+    backgroundColor: theme['background-basic-color-2'],
+    borderColor: theme['background-basic-color-2'],
+  },
+  unselectedButtonText: {
+    color: theme['text-basic-color'],
   },
   buttonFullWidth: {
     flex: 1,
