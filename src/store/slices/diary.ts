@@ -1,25 +1,14 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IDiaryDay, IDiaryEntry } from '../../screens/DiaryDay/types';
 
-type DiaryState = {
-  [date: string]: IDiaryDay;
+const initialState = {
+  dates: {} as IDiaryDay,
 };
-
-const initialState = {} as DiaryState;
 
 const diary = createSlice({
   name: 'diary',
   initialState,
   reducers: {
-    setDiary(state, action: PayloadAction<DiaryState>) {
-      // Set the whole thing into the memory
-    },
-    editMeal(state, action: PayloadAction<IDiaryEntry>) {
-      // Get date
-      // Pick the day in diary
-      // Look for the meal in the day
-      // Update it
-    },
     addMeal(state, action: PayloadAction<IDiaryEntry>) {
       // Get date
       // Pick the day in diary
@@ -31,8 +20,17 @@ const diary = createSlice({
       // Look for the meal in the day
       // Delete it
     },
+    editMeal(state, action: PayloadAction<string>) {
+      // Get date
+      // Pick the day in diary
+      // Look for the meal in the day
+      // Update it
+    },
+    setDiary(state, action: PayloadAction<IDiaryDay>) {
+      state.dates = action.payload;
+    },
   },
 });
 
-export const { editMeal, addMeal, deleteMeal } = diary.actions;
+export const { addMeal, deleteMeal, editMeal, setDiary } = diary.actions;
 export default diary.reducer;

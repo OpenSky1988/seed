@@ -11,12 +11,12 @@ const MealButton: React.FC<TMealButton> = ({ diaryEntry, navigation }) => {
   const theme = useTheme();
   const { category, imageUri, name, notes, time } = diaryEntry;
 
-  const navigate = () => navigation.navigate('Entry', diaryEntry);
+  const navigate = () => navigation.navigate('Entry', { entry: diaryEntry });
 
   return (
     <TouchableOpacity onPress={navigate}>
       <ImageBackground
-        source={{ uri: imageUri ?? null }}
+        source={{ uri: imageUri || null }}
         style={[styles.mealButton, { backgroundColor: theme['color-primary-500'] }]}
       >
         <View style={styles.mealButtonTitleContainer}>

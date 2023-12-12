@@ -9,7 +9,9 @@ type TRootStackParamList = {
   Today: {
     day?: string;
   };
-  Entry: IDiaryEntry | undefined;
+  Entry: {
+    entry?: IDiaryEntry;
+  };
   Diary: undefined;
   Settings: undefined;
   Entry: undefined;

@@ -1,10 +1,11 @@
-import React from 'react';
-import { ScrollView, View } from 'react-native';
 import { Button, Icon, IconProps, Layout, TopNavigation } from '@ui-kitten/components';
+import React from 'react';
+import { ScrollView, TouchableOpacity } from 'react-native';
+import { useSelector } from 'react-redux';
 
 import DateDisplay from '../../components/DateDisplay';
 import MealButton from '../../components/MealButton';
-import data from '../../data/diary';
+import { RootState } from '../../store';
 import styles from './styles';
 import type { TNavigationProps } from './types';
 import { formatDate } from './utils';
@@ -12,9 +13,15 @@ import { formatDate } from './utils';
 const CalendarIcon = (props: IconProps) => <Icon {...props} name='plus' />;
 
 const DiaryDay: React.FC<TNavigationProps> = (navigationProps) => {
-  const day = navigationProps.route.params?.day ?? '2023-11-28T00:00:00';
+  const { navigation, route } = navigationProps;
+  const day = route.params?.day ?? '2023-11-28T00:00:00';
+  // const day = route.params?.day;
   const date = day ? new Date(day) : new Date();
   const formattedToday = formatDate(date);
+
+  const { dates: diary } = useSelector((state: RootState) => state.diary);
+
+  const handleNewMeal = () => navigation.navigate('Entry', {});
 
   return (
     <>
@@ -22,21 +29,25 @@ const DiaryDay: React.FC<TNavigationProps> = (navigationProps) => {
         title={<DateDisplay />}
         alignment="center"
       />
-      <Layout style={styles.container}>
-        <ScrollView>
-          {data[formattedToday]?.map((diaryEntry) => (
+      <Layout style={styles.layoutContainer}>
+        <ScrollView contentContainerStyle={styles.scrollView}>
+          {diary[formattedToday]?.map((diaryEntry) => (
             <MealButton
               {...navigationProps}
               diaryEntry={diaryEntry}
               key={`${diaryEntry.name}-${diaryEntry.time}`}
             />
           ))}
-          <View style={styles.addMealButtonContainer}>
+          <TouchableOpacity
+            onPress={handleNewMeal}
+            style={styles.addMealButtonContainer}
+          >
             <Button
-              style={styles.addMealButton}
               accessoryLeft={CalendarIcon}
+              onPress={handleNewMeal}
+              style={styles.addMealButton}
             />
-          </View>
+          </TouchableOpacity>
         </ScrollView>
       </Layout>
     </>

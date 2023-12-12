@@ -1,3 +1,4 @@
+import { useFocusEffect } from '@react-navigation/native';
 import React, { useCallback, useState } from 'react';
 import { Button, Input, Layout, IndexPath, Select, SelectItem, TopNavigation, Text, withStyles } from '@ui-kitten/components';
 import { useTranslation } from 'react-i18next';
@@ -10,9 +11,9 @@ import { TNavigationProps } from './types';
 import ButtonSwitch from '../../components/ButtonSwitch';
 import PhotoCapture from '../../components/PhotoCapture';
 import ThemedSafeAreaView from '../../components/ThemedSafeAreaView';
-import { MEAL_CATEGORIES } from '../../constants';
 import { RootState } from '../../store';
 import { useBackAction } from '../../utils/hooks';
+import { getCategoryIndexPath } from './ustils';
 
 const Title: React.FC<TextProps> = () => {
   const { t } = useTranslation();
@@ -23,7 +24,6 @@ const Title: React.FC<TextProps> = () => {
 const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
   const { t } = useTranslation();
   
-  const diaryEntry = route.params;
   const sensationLevels = [1, 2, 3, 4, 5];
   const mealCategories = [
     t('diary_meal.category.breakfast'),
@@ -32,14 +32,28 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
     t('diary_meal.category.snack'),
   ];
 
-  const [category, setCategory] = useState<IndexPath>(new IndexPath(MEAL_CATEGORIES.indexOf(diaryEntry?.category ?? 'breakfast')));
-  const [dateTime, setDateTime] = useState<Date>(new Date(diaryEntry?.created_at ?? ''));
-  const [fulfillmentIndex, setFulfillmentIndex] = useState<number>((diaryEntry?.fulfillment ?? 1) - 1);
-  const [hungerIndex, setHungerIndex] = useState<number>((diaryEntry?.hunger ?? 1) - 1);
-  const [imageUri, setImageUri] = useState<string | undefined>(diaryEntry?.imageUri);
+  const [category, setCategory] = useState<IndexPath>(getCategoryIndexPath('breakfast'));
+  const [dateTime, setDateTime] = useState<Date>(new Date());
+  const [fulfillmentIndex, setFulfillmentIndex] = useState<number>(0);
+  const [hungerIndex, setHungerIndex] = useState<number>(0);
+  const [imageUri, setImageUri] = useState<string | undefined>();
   const [isDateTimePickerVisible, setIsDateTimePickerVisible] = useState<boolean>(false);
-  const [name, setName] = useState<string>(diaryEntry?.name ?? '');
-  const [notes, setNotes] = useState<string>(diaryEntry?.notes ?? '');
+  const [name, setName] = useState<string>('');
+  const [notes, setNotes] = useState<string>('');
+
+  const diaryEntry = route.params?.entry;
+
+  useFocusEffect(
+    useCallback(() => {
+      setCategory(getCategoryIndexPath(diaryEntry?.category ?? 'breakfast'));
+      setDateTime(diaryEntry?.created_at ? new Date(diaryEntry?.created_at) : new Date());
+      setFulfillmentIndex((diaryEntry?.fulfillment ?? 1) - 1);
+      setHungerIndex((diaryEntry?.hunger ?? 1) - 1);
+      setImageUri(diaryEntry?.imageUri);
+      setName(diaryEntry?.name ?? '');
+      setNotes(diaryEntry?.notes ?? '');
+    }, [diaryEntry])
+  );
 
   const { language } = useSelector((state: RootState) => state.settings);
   const BackAction = useBackAction();

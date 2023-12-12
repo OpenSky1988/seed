@@ -1,19 +1,27 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    paddingHorizontal: 16,
-    position: 'relative',
-  },
   addMealButton: {
     paddingVertical: 20,
     marginTop: 24,
     borderRadius: 50,
   },
   addMealButtonContainer: {
-    display: 'flex',
     alignItems: 'center',
+    display: 'flex',
+    flex: 1,
+    justifyContent: 'flex-end',
+    minHeight: 160,
+    paddingBottom: 72,
+  },
+  layoutContainer: {
+    flex: 1,
+    flexGrow: 1,
+    paddingHorizontal: 16,
+    position: 'relative',
+  },
+  scrollView: {
+    flexGrow: 1,
   }
 });
 

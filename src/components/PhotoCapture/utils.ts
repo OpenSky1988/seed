@@ -18,7 +18,7 @@ const handleTakePhoto = (
     } else if (response.errorCode) {
       console.log('ImagePicker Error: ', response.errorMessage);
     } else {
-      const source = { uri: response.assets?.[0].uri };
+      const source = { uri: response.assets?.[0].uri ?? null };
       setImageUri(source.uri as string);
       if (onPhotoTaken) {
         onPhotoTaken(source.uri as string);
@@ -43,7 +43,7 @@ const handleSelectPhoto = (
     } else if (response.errorCode) {
       console.log('ImagePicker Error: ', response.errorMessage);
     } else {
-      const source = { uri: response.assets?.[0].uri };
+      const source = { uri: response.assets?.[0].uri ?? null };
       setImageUri(source.uri as string);
       if (onPhotoTaken) {
         onPhotoTaken(source.uri as string);
