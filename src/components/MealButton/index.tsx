@@ -11,6 +11,8 @@ const MealButton: React.FC<TMealButton> = ({ diaryEntry, navigation }) => {
   const theme = useTheme();
   const { category, imageUri, name, notes, time } = diaryEntry;
 
+  const [hours, minutes] = time.split(':');
+
   const navigate = () => navigation.navigate('Entry', { entry: diaryEntry });
 
   return (
@@ -21,7 +23,7 @@ const MealButton: React.FC<TMealButton> = ({ diaryEntry, navigation }) => {
       >
         <View style={styles.mealButtonTitleContainer}>
           <Text style={[ styles.mealButtonCategory, styles.buttonText ]}>{t(`diary_meal.category.${category}`)}</Text>
-          <Text style={[ styles.mealButtonTime, styles.buttonText ]}>{time}</Text>
+          <Text style={[ styles.mealButtonTime, styles.buttonText ]}>{`${hours}:${minutes}`}</Text>
         </View>
         <Text style={[ styles.mealButtonName, styles.buttonText ]}>• {name}</Text>
         {!!notes &&

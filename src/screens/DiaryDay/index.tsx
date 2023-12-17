@@ -14,12 +14,10 @@ const CalendarIcon = (props: IconProps) => <Icon {...props} name='plus' />;
 
 const DiaryDay: React.FC<TNavigationProps> = (navigationProps) => {
   const { navigation, route } = navigationProps;
-  const day = route.params?.day ?? '2023-11-28T00:00:00';
-  // const day = route.params?.day;
-  const date = day ? new Date(day) : new Date();
-  const formattedToday = formatDate(date);
 
-  const { dates: diary } = useSelector((state: RootState) => state.diary);
+  const date = (route.params?.day ?? '2023-11-28') || formatDate(new Date());
+
+  const diary = useSelector((state: RootState) => state.diary);
 
   const handleNewMeal = () => navigation.navigate('Entry', {});
 
@@ -31,7 +29,7 @@ const DiaryDay: React.FC<TNavigationProps> = (navigationProps) => {
       />
       <Layout style={styles.layoutContainer}>
         <ScrollView contentContainerStyle={styles.scrollView}>
-          {diary[formattedToday]?.map((diaryEntry) => (
+          {Object.values(diary[date] || {})?.map((diaryEntry) => (
             <MealButton
               {...navigationProps}
               diaryEntry={diaryEntry}

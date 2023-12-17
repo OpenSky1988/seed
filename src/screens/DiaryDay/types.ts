@@ -22,7 +22,9 @@ interface IDiaryEntry {
 }
 
 interface IDiaryDay {
-  [key: string]: IDiaryEntry[];
+  [key: string]: {
+    [key: string]: IDiaryEntry;
+  }
 }
 
 export type { TNavigationProps, IDiaryDay, IDiaryEntry };

@@ -1,10 +1,10 @@
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import React, { useCallback, useState } from 'react';
 import { Button, Input, Layout, IndexPath, Select, SelectItem, TopNavigation, Text, withStyles } from '@ui-kitten/components';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, TextProps } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './styles';
 import { TNavigationProps } from './types';
@@ -13,7 +13,10 @@ import PhotoCapture from '../../components/PhotoCapture';
 import ThemedSafeAreaView from '../../components/ThemedSafeAreaView';
 import { RootState } from '../../store';
 import { useBackAction } from '../../utils/hooks';
-import { getCategoryIndexPath } from './ustils';
+import { getCategoryIndexPath } from './utils';
+import { editMeal } from '../../store/slices/diary';
+import { formatDate, formatTime } from '../DiaryDay/utils';
+import { MEAL_CATEGORIES } from '../../constants';
 
 const Title: React.FC<TextProps> = () => {
   const { t } = useTranslation();
@@ -23,6 +26,8 @@ const Title: React.FC<TextProps> = () => {
 
 const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
   const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const navigation = useNavigation();
   
   const sensationLevels = [1, 2, 3, 4, 5];
   const mealCategories = [
@@ -34,8 +39,8 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
 
   const [category, setCategory] = useState<IndexPath>(getCategoryIndexPath('breakfast'));
   const [dateTime, setDateTime] = useState<Date>(new Date());
-  const [fulfillmentIndex, setFulfillmentIndex] = useState<number>(0);
-  const [hungerIndex, setHungerIndex] = useState<number>(0);
+  const [fulfillment, setFulfillment] = useState<number>(0);
+  const [hunger, setHunger] = useState<number>(0);
   const [imageUri, setImageUri] = useState<string | undefined>();
   const [isDateTimePickerVisible, setIsDateTimePickerVisible] = useState<boolean>(false);
   const [name, setName] = useState<string>('');
@@ -47,12 +52,12 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
     useCallback(() => {
       setCategory(getCategoryIndexPath(diaryEntry?.category ?? 'breakfast'));
       setDateTime(diaryEntry?.created_at ? new Date(diaryEntry?.created_at) : new Date());
-      setFulfillmentIndex((diaryEntry?.fulfillment ?? 1) - 1);
-      setHungerIndex((diaryEntry?.hunger ?? 1) - 1);
+      setFulfillment(diaryEntry?.fulfillment ?? 1);
+      setHunger(diaryEntry?.hunger ?? 1);
       setImageUri(diaryEntry?.imageUri);
       setName(diaryEntry?.name ?? '');
       setNotes(diaryEntry?.notes ?? '');
-    }, [diaryEntry])
+    }, [diaryEntry]),
   );
 
   const { language } = useSelector((state: RootState) => state.settings);
@@ -70,6 +75,25 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
   const handleSelectCategory = (index: IndexPath | IndexPath[]) => setCategory(index as IndexPath);
   const showDateTimePicker = () => setIsDateTimePickerVisible(true);
   const hideDateTimePicker = () => setIsDateTimePickerVisible(false);
+
+  const handleSubmit = () => {
+    const date = formatDate(dateTime);
+    const time = formatTime(dateTime);
+    const created_at = `${date}T${time}`;
+
+    dispatch(editMeal({
+      category: MEAL_CATEGORIES[category - 1],
+      created_at,
+      fulfillment,
+      hunger,
+      imageUri,
+      name,
+      notes,
+      time,
+    }));
+
+    navigation.goBack();
+  };
 
   return (
     <ThemedSafeAreaView>
@@ -104,14 +128,14 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
           <ButtonSwitch
             label={t('entry.form.fulfillment')}
             levels={sensationLevels}
-            selectedIndex={fulfillmentIndex}
-            setSelectedIndex={setFulfillmentIndex}
+            selectedIndex={fulfillment}
+            setSelectedIndex={setFulfillment}
           />
           <ButtonSwitch
             label={t('entry.form.hunger')}
             levels={sensationLevels}
-            selectedIndex={hungerIndex}
-            setSelectedIndex={setHungerIndex}
+            selectedIndex={hunger}
+            setSelectedIndex={setHunger}
           />
 
           <Button
@@ -140,7 +164,7 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
           />
 
           <Button
-            onPress={() => console.log('Submit logic here')}
+            onPress={handleSubmit}
             style={[eva?.style?.input, eva?.style?.button]}
           >
             {t('entry.form.submit_button')}

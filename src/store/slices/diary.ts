@@ -1,36 +1,49 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { IDiaryDay, IDiaryEntry } from '../../screens/DiaryDay/types';
 
-const initialState = {
-  dates: {} as IDiaryDay,
-};
+const initialState = {} as IDiaryDay;
 
 const diary = createSlice({
   name: 'diary',
   initialState,
   reducers: {
-    addMeal(state, action: PayloadAction<IDiaryEntry>) {
-      // Get date
-      // Pick the day in diary
-      // Push the meal there
+    deleteMeal(state, action: PayloadAction<IDiaryEntry>) {
+      const date = action.payload.created_at.split('T')[0];
+      const time = action.payload.time;
+
+      const newDate = { ...state[date] };
+
+      // If they edit date before deleting - ??
+      // If they edit time before deleting - ??
+
+      delete newDate[time];
+
+      return (state = {
+        ...state,
+        [date]: newDate,
+      });
     },
-    deleteMeal(state, action: PayloadAction<string>) {
-      // Get date
-      // Pick the day in diary
-      // Look for the meal in the day
-      // Delete it
+    editMeal(state, action: PayloadAction<IDiaryEntry>) {
+      const date = action.payload.created_at.split('T')[0];
+
+      const time = action.payload.time;
+
+      // delete from the previous date if the date changes
+      // delete the previous time if the time changes
+
+      return (state = {
+        ...state,
+        [date]: {
+          ...state[date],
+          [time]: action.payload,
+        },
+      });
     },
-    editMeal(state, action: PayloadAction<string>) {
-      // Get date
-      // Pick the day in diary
-      // Look for the meal in the day
-      // Update it
-    },
-    setDiary(state, action: PayloadAction<IDiaryDay>) {
-      state.dates = action.payload;
+    setDiary(_state, action: PayloadAction<IDiaryDay>) {
+      return action.payload;
     },
   },
 });
 
-export const { addMeal, deleteMeal, editMeal, setDiary } = diary.actions;
+export const { deleteMeal, editMeal, setDiary } = diary.actions;
 export default diary.reducer;

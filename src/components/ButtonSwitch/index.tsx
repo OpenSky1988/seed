@@ -24,16 +24,17 @@ const ButtonSwitchBase: React.FC<IButtonSwitchProps> = ({
   const renderButtons = () => {
     return children.map((childComponent, index) => {
       const { props: { style, ...childProps } } = childComponent;
+      const level = index + 1;
 
       const borderStyle = getBorderStyleForPosition(index, children.length);
-      const isSelected = index === selectedIndex;
+      const isSelected = level === selectedIndex;
 
-      const handlePress = () => onSelect(index);
+      const handlePress = () => onSelect(level);
 
       return (
         <childComponent.type
           {...childProps}
-          key={`${label}-${index}`}
+          key={`${label}-${level}`}
           onPress={handlePress}
           status={isSelected ? 'primary' : 'basic'}
           style={[
@@ -83,9 +84,9 @@ const ButtonSwitch: React.FC<ILevelButtonSwitchProps> = ({
     onSelect={setSelectedIndex}
     selectedIndex={selectedIndex}
   >
-    {levels.map((level, i) => (
+    {levels.map((level, index) => (
       <Button key={`${label}-${level}`}>
-        {i === selectedIndex
+        {(index + 1) === selectedIndex
           ? level.toString()
           : (evaProps) => <ThemedText evaProps={evaProps}>{level.toString()}</ThemedText>
         }
