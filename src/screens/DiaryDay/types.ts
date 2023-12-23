@@ -1,16 +1,10 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { TMealCategories, TRootStackParamList } from '../../types';
 
-type TNavigationProps = NativeStackScreenProps<TRootStackParamList, 'Today'>;
-
-// interface IMenuRouteItem {
-//   params?: { [key: string]: unknown };
-//   to: keyof TRootStackParamList;
-//   title: string;
-//   subtitle?: string;
-// }
+type TNavigationProps = NativeStackScreenProps<TRootStackParamList, 'Today' | 'DiaryDay'>;
 
 interface IDiaryEntry {
+  id: string;
   category: TMealCategories;
   created_at: string;
   fulfillment: number;
@@ -21,10 +15,8 @@ interface IDiaryEntry {
   time: string;
 }
 
-interface IDiaryDay {
-  [key: string]: {
-    [key: string]: IDiaryEntry;
-  }
+interface IDiary {
+  [key: string]: IDiaryEntry[];
 }
 
-export type { TNavigationProps, IDiaryDay, IDiaryEntry };
+export type { TNavigationProps, IDiary, IDiaryEntry };

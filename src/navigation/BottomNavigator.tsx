@@ -56,6 +56,8 @@ const TabNavigator = () => (
       <Screen name="Diary" component={Diary} />
       <Screen name="Today" component={DiaryDay} />
       <Screen name="Settings" component={Settings} />
+
+      <Screen name="DiaryDay" component={DiaryDay} />
       <Screen name="Entry" component={Entry} />
     </Navigator>
   </ThemedSafeAreaView>

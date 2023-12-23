@@ -3,18 +3,17 @@ import { IDiaryEntry } from '../screens/DiaryDay/types';
 type SvgProps = typeof Svg;
 
 type TRootStackParamList = {
+  Diary: undefined;
   DiaryDay: {
-    day?: string;
-  };
-  Today: {
     day?: string;
   };
   Entry: {
     entry?: IDiaryEntry;
   };
-  Diary: undefined;
+  Today: {
+    day?: string;
+  };
   Settings: undefined;
-  Entry: undefined;
 };
 
 type TLanguage = 'es' | 'en' | 'ru';

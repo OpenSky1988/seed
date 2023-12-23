@@ -1,5 +1,5 @@
 import { Button, Icon, IconProps, Layout, TopNavigation } from '@ui-kitten/components';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 
@@ -8,14 +8,18 @@ import MealButton from '../../components/MealButton';
 import { RootState } from '../../store';
 import styles from './styles';
 import type { TNavigationProps } from './types';
-import { formatDate } from './utils';
+import { sortByTime, formatDate } from './utils';
 
 const CalendarIcon = (props: IconProps) => <Icon {...props} name='plus' />;
 
 const DiaryDay: React.FC<TNavigationProps> = (navigationProps) => {
   const { navigation, route } = navigationProps;
 
-  const date = (route.params?.day ?? '2023-11-28') || formatDate(new Date());
+  const [date, setDate] = useState(formatDate(new Date()));
+
+  useEffect(() => {
+    setDate((route.params?.day ?? '2023-11-28') || formatDate(new Date()));
+  }, [route.params?.day]);
 
   const diary = useSelector((state: RootState) => state.diary);
 
@@ -24,15 +28,16 @@ const DiaryDay: React.FC<TNavigationProps> = (navigationProps) => {
   return (
     <>
       <TopNavigation
-        title={<DateDisplay />}
+        title={<DateDisplay date={date} />}
         alignment="center"
       />
       <Layout style={styles.layoutContainer}>
         <ScrollView contentContainerStyle={styles.scrollView}>
-          {Object.values(diary[date] || {})?.map((diaryEntry) => (
+          {[ ...(diary[date] || []) ].sort(sortByTime).map((diaryEntry) => (
             <MealButton
               {...navigationProps}
               diaryEntry={diaryEntry}
+              imageUri={diaryEntry.imageUri}
               key={`${diaryEntry.name}-${diaryEntry.time}`}
             />
           ))}

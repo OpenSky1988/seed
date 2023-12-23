@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IDiaryDay, IDiaryEntry } from '../../screens/DiaryDay/types';
+import { IDiary, IDiaryEntry } from '../../screens/DiaryDay/types';
 
-const initialState = {} as IDiaryDay;
+const initialState = {} as IDiary;
 
 const diary = createSlice({
   name: 'diary',
@@ -9,37 +9,45 @@ const diary = createSlice({
   reducers: {
     deleteMeal(state, action: PayloadAction<IDiaryEntry>) {
       const date = action.payload.created_at.split('T')[0];
-      const time = action.payload.time;
+      const idToRemove = action.payload.id;
 
-      const newDate = { ...state[date] };
+      const newDate = [ ...state[date] ].filter((meal) => meal.id !== idToRemove);
 
-      // If they edit date before deleting - ??
-      // If they edit time before deleting - ??
+      // Delete from the original date, not the edited one
 
-      delete newDate[time];
-
-      return (state = {
+      return ({
         ...state,
         [date]: newDate,
       });
     },
-    editMeal(state, action: PayloadAction<IDiaryEntry>) {
-      const date = action.payload.created_at.split('T')[0];
+    editMeal(state, action: PayloadAction<{
+      meal: IDiaryEntry;
+      originalMeal?: IDiaryEntry;
+    }>) {
+      const date = action.payload.meal.created_at.split('T')[0];
+      const originalDate = action.payload.originalMeal?.created_at.split('T')[0];
 
-      const time = action.payload.time;
+      if (originalDate && originalDate !== date) {
+        const mealIndexToRemove = state[originalDate]
+          .findIndex((meal) => meal.id === action.payload.meal.id);
+        
+        if (mealIndexToRemove !== -1) {
+          state[originalDate].splice(mealIndexToRemove, 1);
 
-      // delete from the previous date if the date changes
-      // delete the previous time if the time changes
+          if (state[originalDate].length === 0) {
+            delete state[originalDate];
+          }
+        }
+      }
 
-      return (state = {
-        ...state,
-        [date]: {
-          ...state[date],
-          [time]: action.payload,
-        },
-      });
+      if (!state[date]) {
+        state[date] = [];
+      }
+      state[date].push(action.payload.meal);
+
+      return state;
     },
-    setDiary(_state, action: PayloadAction<IDiaryDay>) {
+    setDiary(_state, action: PayloadAction<IDiary>) {
       return action.payload;
     },
   },

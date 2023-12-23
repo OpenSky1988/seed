@@ -6,10 +6,11 @@ import { Text, useTheme } from '@ui-kitten/components';
 import styles from './styles';
 import TMealButton from './types';
 
-const MealButton: React.FC<TMealButton> = ({ diaryEntry, navigation }) => {
+const MealButton: React.FC<TMealButton> = ({ diaryEntry, imageUri, navigation }) => {
   const { t } = useTranslation();
   const theme = useTheme();
-  const { category, imageUri, name, notes, time } = diaryEntry;
+  const { category, name, notes, time } = diaryEntry;
+  console.log('--- image URI ---', imageUri);
 
   const [hours, minutes] = time.split(':');
 

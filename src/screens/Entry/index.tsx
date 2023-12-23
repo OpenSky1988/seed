@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { ScrollView, TextProps } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { useDispatch, useSelector } from 'react-redux';
+import uuid from 'react-native-uuid';
 
 import styles from './styles';
 import { TNavigationProps } from './types';
@@ -82,14 +83,18 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
     const created_at = `${date}T${time}`;
 
     dispatch(editMeal({
-      category: MEAL_CATEGORIES[category - 1],
-      created_at,
-      fulfillment,
-      hunger,
-      imageUri,
-      name,
-      notes,
-      time,
+      originalMeal: diaryEntry,
+      meal: {
+        id: diaryEntry?.id ?? uuid.v4() as string,
+        category: MEAL_CATEGORIES[(category as unknown as number) - 1],
+        created_at,
+        fulfillment,
+        hunger,
+        imageUri,
+        name,
+        notes,
+        time,
+      },
     }));
 
     navigation.goBack();

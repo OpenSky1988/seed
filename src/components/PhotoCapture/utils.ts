@@ -20,16 +20,14 @@ const handleTakePhoto = (
     } else {
       const source = { uri: response.assets?.[0].uri ?? null };
       setImageUri(source.uri as string);
-      if (onPhotoTaken) {
-        onPhotoTaken(source.uri as string);
-      }
+      onPhotoTaken(source.uri as string);
     }
   });
 };
 
 const handleSelectPhoto = (
   setImageUri: (imageUri: string) => void,
-  onPhotoTaken: (uri: string) => void,
+  onPhotoSelected: (uri: string) => void,
 ) => {
   const options = {
     noData: true,
@@ -45,9 +43,7 @@ const handleSelectPhoto = (
     } else {
       const source = { uri: response.assets?.[0].uri ?? null };
       setImageUri(source.uri as string);
-      if (onPhotoTaken) {
-        onPhotoTaken(source.uri as string);
-      }
+      onPhotoSelected(source.uri as string);
     }
   });
 };
