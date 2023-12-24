@@ -1,28 +1,43 @@
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
 import React, { useCallback, useState } from 'react';
-import { Button, Input, Layout, IndexPath, Select, SelectItem, TopNavigation, Text, withStyles } from '@ui-kitten/components';
+import {
+  Button,
+  IndexPath,
+  Input,
+  Layout,
+  Select,
+  SelectItem,
+  Text,
+  TopNavigation,
+  withStyles,
+} from '@ui-kitten/components';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, TextProps } from 'react-native';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { useDispatch, useSelector } from 'react-redux';
 import uuid from 'react-native-uuid';
+import { useDispatch, useSelector } from 'react-redux';
 
-import styles from './styles';
-import { TNavigationProps } from './types';
 import ButtonSwitch from '../../components/ButtonSwitch';
 import PhotoCapture from '../../components/PhotoCapture';
 import ThemedSafeAreaView from '../../components/ThemedSafeAreaView';
+import { MEAL_CATEGORIES } from '../../constants';
 import { RootState } from '../../store';
 import { useBackAction } from '../../utils/hooks';
 import { getCategoryIndexPath } from './utils';
-import { editMeal } from '../../store/slices/diary';
+import { deleteMeal, editMeal } from '../../store/slices/diary';
 import { formatDate, formatTime } from '../DiaryDay/utils';
-import { MEAL_CATEGORIES } from '../../constants';
+import { IDiaryEntry } from '../DiaryDay/types';
+import styles from './styles';
+import { TNavigationProps } from './types';
 
-const Title: React.FC<TextProps> = () => {
+const Title: React.FC<TextProps & { title: string }> = ({ title }) => {
   const { t } = useTranslation();
 
-  return <Text category='h6'>{t('entry.screen_title')}</Text>
+  return (
+    <Text numberOfLines={1} category='h6' style={{ paddingHorizontal: 48 }}>
+      {title || t('entry.screen_title')}
+    </Text>
+  );
 };
 
 const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
@@ -55,7 +70,7 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
       setDateTime(diaryEntry?.created_at ? new Date(diaryEntry?.created_at) : new Date());
       setFulfillment(diaryEntry?.fulfillment ?? 1);
       setHunger(diaryEntry?.hunger ?? 1);
-      setImageUri(diaryEntry?.imageUri);
+      setImageUri(diaryEntry?.imageUri ?? '');
       setName(diaryEntry?.name ?? '');
       setNotes(diaryEntry?.notes ?? '');
     }, [diaryEntry]),
@@ -64,7 +79,7 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
   const { language } = useSelector((state: RootState) => state.settings);
   const BackAction = useBackAction();
 
-  const TitleMemoized = useCallback(() => <Title />, []);
+  const TitleMemoized = useCallback(() => <Title title={name} />, [name]);
   const displayDateTime = `${dateTime.toLocaleDateString()} ${dateTime.toLocaleTimeString()}`;
 
   const handleConfirmDateTime = (date: Date) => {
@@ -100,6 +115,11 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
     navigation.goBack();
   };
 
+  const handleDelete = () => {
+    dispatch(deleteMeal(diaryEntry as IDiaryEntry));
+    navigation.goBack();
+  };
+
   return (
     <ThemedSafeAreaView>
       <TopNavigation
@@ -109,7 +129,7 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
       />
       <ScrollView style={eva?.style?.container}>
         <Layout style={eva?.style?.layout}>
-          <PhotoCapture onPhotoTaken={handlePhotoTaken} />
+          <PhotoCapture imageUri={imageUri} onPhotoTaken={handlePhotoTaken} />
           <Input
             label={t('entry.form.name')}
             onChangeText={setName}
@@ -174,6 +194,13 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
           >
             {t('entry.form.submit_button')}
           </Button>
+          {diaryEntry?.id && <Button
+            onPress={handleDelete}
+            status="danger"
+            style={[eva?.style?.input, eva?.style?.button]}
+          >
+            {t('entry.form.delete_button')}
+          </Button>}
         </Layout>
       </ScrollView>
     </ThemedSafeAreaView>

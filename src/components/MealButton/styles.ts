@@ -10,10 +10,7 @@ const styles = StyleSheet.create({
   },
   mealButton: {
     borderRadius: 16,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
     marginVertical: 10,
-    padding: 20,
   },
   mealButtonCategory: {
     color: COLORS.white,
@@ -40,9 +37,19 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
   },
   buttonText: {
-    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowColor: 'rgba(0, 0, 0, 0.85)',
     textShadowRadius: 4,
-  }
+  },
+  overlay: {
+    borderRadius: 16,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    padding: 20,
+  },
+  overlayShadow: {
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+  },
 });
 
 export default styles;

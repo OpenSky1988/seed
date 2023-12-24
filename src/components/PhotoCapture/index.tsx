@@ -1,6 +1,6 @@
 import { useActionSheet } from '@expo/react-native-action-sheet';
 import { Icon, IconProps, withStyles } from '@ui-kitten/components';
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { View, ImageBackground, TouchableOpacity } from 'react-native';
 
@@ -19,9 +19,7 @@ const CameraIcon: React.FC<IconProps> = ({ eva, hasImage, ...restProps }) => (
 
 const ThemedCameraIcon = withStyles(CameraIcon, cameraIconStyles);
 
-const PhotoCapture: React.FC<IPhotoCapture> = ({ eva, onPhotoTaken }) => {
-  const [imageUri, setImageUri] = useState<string | undefined>();
-
+const PhotoCapture: React.FC<IPhotoCapture> = ({ eva, imageUri, onPhotoTaken }) => {
   const { showActionSheetWithOptions } = useActionSheet();
   const { t } = useTranslation();
 
@@ -39,11 +37,11 @@ const PhotoCapture: React.FC<IPhotoCapture> = ({ eva, onPhotoTaken }) => {
     }, (selectedIndex?: number) => {
       switch (selectedIndex) {
         case 0:
-          handleTakePhoto(setImageUri, onPhotoTaken);
+          handleTakePhoto(onPhotoTaken);
           break;
 
         case 1:
-          handleSelectPhoto(setImageUri, onPhotoTaken);
+          handleSelectPhoto(onPhotoTaken);
           break;
       }
     });
@@ -54,7 +52,7 @@ const PhotoCapture: React.FC<IPhotoCapture> = ({ eva, onPhotoTaken }) => {
       <TouchableOpacity onPress={handleOpenActionSheet} style={{ width: '100%' }}>
         <ImageBackground
           imageStyle={{ borderRadius: eva?.style?.preview.borderRadius }}
-          source={{ uri: imageUri }}
+          source={{ uri: imageUri || undefined }}
           style={eva?.style?.preview}
         >
           <ThemedCameraIcon hasImage={!!imageUri} />

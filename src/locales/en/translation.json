@@ -44,7 +44,8 @@
       "hunger": "Hunger",
       "notes": "Notes",
       "notes_placeholder": "Additional notes",
-      "submit_button": "Submit"
+      "submit_button": "Submit",
+      "delete_button": "Delete"
     },
     "photo_capture": {
       "action_sheet": {

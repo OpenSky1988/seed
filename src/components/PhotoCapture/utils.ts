@@ -1,7 +1,6 @@
 import { CameraType, MediaType, launchCamera, launchImageLibrary } from "react-native-image-picker";
 
 const handleTakePhoto = (
-  setImageUri: (imageUri: string) => void,
   onPhotoTaken: (uri: string) => void,
 ) => {
   const options = {
@@ -19,14 +18,12 @@ const handleTakePhoto = (
       console.log('ImagePicker Error: ', response.errorMessage);
     } else {
       const source = { uri: response.assets?.[0].uri ?? null };
-      setImageUri(source.uri as string);
       onPhotoTaken(source.uri as string);
     }
   });
 };
 
 const handleSelectPhoto = (
-  setImageUri: (imageUri: string) => void,
   onPhotoSelected: (uri: string) => void,
 ) => {
   const options = {
@@ -42,7 +39,6 @@ const handleSelectPhoto = (
       console.log('ImagePicker Error: ', response.errorMessage);
     } else {
       const source = { uri: response.assets?.[0].uri ?? null };
-      setImageUri(source.uri as string);
       onPhotoSelected(source.uri as string);
     }
   });

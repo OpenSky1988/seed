@@ -44,7 +44,8 @@
       "hunger": "Голод",
       "notes": "Заметки",
       "notes_placeholder": "Дополнительные заметки",
-      "submit_button": "Отправить"
+      "submit_button": "Отправить",
+      "delete_button": "Удалить"
     },
     "photo_capture": {
       "action_sheet": {
