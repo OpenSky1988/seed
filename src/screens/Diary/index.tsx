@@ -6,11 +6,12 @@ import {
   TopNavigation,
   Text,
   withStyles,
+  Button,
 } from '@ui-kitten/components';
 import { CalendarDateInfo } from '@ui-kitten/components/ui/calendar/type';
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyleProp, TextProps, View, ViewStyle } from 'react-native';
+import { StyleProp, TextProps, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { useSelector } from 'react-redux';
 
 import styles from './styles';
@@ -26,6 +27,7 @@ const Title: React.FC<TextProps> = () => {
 };
 
 const Diary: React.FC<TNavigationProps> = ({ navigation, eva }) => {
+  const { t } = useTranslation();
   const { language } = useSelector((state: RootState) => state.settings);
   const diary = useSelector((state: RootState) => state.diary);
 
@@ -68,6 +70,8 @@ const Diary: React.FC<TNavigationProps> = ({ navigation, eva }) => {
     );
   };
 
+  const handleExport = () => {};
+
   return (
     <>
       <TopNavigation
@@ -79,7 +83,16 @@ const Diary: React.FC<TNavigationProps> = ({ navigation, eva }) => {
           dateService={localeDateService}
           onSelect={handleSelect}
           renderDay={renderDay}
+          style={eva?.style?.calendar}
         />
+        <TouchableOpacity
+          onPress={handleExport}
+          style={eva?.style?.exportButtonContainer}
+        >
+          <Button onPress={handleExport} style={eva?.style?.exportButton}>
+            {t('diary_screen.export_button')}
+          </Button>
+        </TouchableOpacity>
       </Layout>
     </>
   );

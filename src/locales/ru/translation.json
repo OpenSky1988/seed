@@ -5,7 +5,8 @@
     "settings_tab": "Настройки"
   },
   "diary_screen": {
-    "screen_title": "Дневник"
+    "screen_title": "Дневник",
+    "export_button": "Экспорт"
   },
   "settings": {
     "screen_title": "Настройки",
