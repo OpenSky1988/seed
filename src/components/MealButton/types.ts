@@ -1,7 +1,8 @@
-import { IDiaryEntry, TProps } from '../../screens/DiaryDay/types';
+import type { IDiaryEntry } from '../../screens/DiaryDay/types';
 
 type TMealButton = {
   diaryEntry: IDiaryEntry;
-} & TProps;
+  imageUri: string | undefined;
+};
 
-export default TMealButton;
+export type { TMealButton };

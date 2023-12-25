@@ -4,7 +4,7 @@ import { TouchableOpacity, View, ImageBackground, StyleProp, ViewStyle } from 'r
 import { Text, useTheme } from '@ui-kitten/components';
 
 import styles from './styles';
-import TMealButton from './types';
+import type { TMealButton } from './types';
 
 const MealButton: React.FC<TMealButton> = ({ diaryEntry, imageUri, navigation }) => {
   const { t } = useTranslation();

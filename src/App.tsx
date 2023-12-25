@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { ApplicationProvider, IconRegistry } from '@ui-kitten/components';
 import { EvaIconsPack } from '@ui-kitten/eva-icons';
 import React, { useEffect } from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { get } from './async-storage';
@@ -14,6 +15,7 @@ import { setDiary } from './store/slices/diary';
 import getTheme from './theme';
 
 import diary from './data/diary';
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -34,11 +36,15 @@ const App: React.FC = () => {
     <>
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={theme}>
-        <ActionSheetProvider>
-          <NavigationContainer>
-            <TabNavigator />
-          </NavigationContainer>
-        </ActionSheetProvider>
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <BottomSheetModalProvider>
+            <ActionSheetProvider>
+              <NavigationContainer>
+                <TabNavigator />
+              </NavigationContainer>
+            </ActionSheetProvider>
+          </BottomSheetModalProvider>
+        </GestureHandlerRootView>
       </ApplicationProvider>
     </>
   );

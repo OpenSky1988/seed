@@ -1,4 +1,4 @@
-import { CameraType, MediaType, launchCamera, launchImageLibrary } from "react-native-image-picker";
+import { CameraType, MediaType, launchCamera, launchImageLibrary } from 'react-native-image-picker';
 
 const handleTakePhoto = (
   onPhotoTaken: (uri: string) => void,

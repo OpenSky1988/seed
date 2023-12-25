@@ -1,4 +1,4 @@
-import { ThemedComponentProps } from "@ui-kitten/components";
+import { ThemedComponentProps } from '@ui-kitten/components';
 
 type IPhotoCapture = ThemedComponentProps<{}> & {
   imageUri?: string;

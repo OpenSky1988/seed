@@ -28,7 +28,7 @@ import { deleteMeal, editMeal } from '../../store/slices/diary';
 import { formatDate, formatTime } from '../DiaryDay/utils';
 import { IDiaryEntry } from '../DiaryDay/types';
 import styles from './styles';
-import { TNavigationProps } from './types';
+import type { TNavigationProps } from './types';
 
 const Title: React.FC<TextProps & { title: string }> = ({ title }) => {
   const { t } = useTranslation();

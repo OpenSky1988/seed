@@ -1,4 +1,4 @@
-import { IDiaryEntry } from "./types";
+import type { IDiaryEntry } from './types';
 
 const sortByTime = (a: IDiaryEntry, b: IDiaryEntry) => {
   const timeA = a.time;

@@ -1,3 +1,4 @@
+import { BottomSheetModal } from '@gorhom/bottom-sheet';
 import {
   Calendar,
   Layout,
@@ -9,7 +10,7 @@ import {
   Button,
 } from '@ui-kitten/components';
 import { CalendarDateInfo } from '@ui-kitten/components/ui/calendar/type';
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { StyleProp, TextProps, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -19,6 +20,7 @@ import type { TNavigationProps } from './types';
 import calendarTranslation from '../../locales/calendar';
 import { RootState } from '../../store';
 import { formatDate } from '../DiaryDay/utils';
+import ExportBottomSheet from '../../components/ExportBottomSheet';
 
 const Title: React.FC<TextProps> = () => {
   const { t } = useTranslation();
@@ -70,7 +72,13 @@ const Diary: React.FC<TNavigationProps> = ({ navigation, eva }) => {
     );
   };
 
-  const handleExport = () => {};
+  const sheetRef = useRef<BottomSheetModal>(null);
+
+  const handleExport = () => sheetRef.current?.present();
+  const handleClose = useCallback(() => {
+    sheetRef.current?.close();
+  }, []);
+
 
   return (
     <>
@@ -94,6 +102,7 @@ const Diary: React.FC<TNavigationProps> = ({ navigation, eva }) => {
           </Button>
         </TouchableOpacity>
       </Layout>
+      <ExportBottomSheet innerRef={sheetRef} onClose={handleClose} />
     </>
   );
 };

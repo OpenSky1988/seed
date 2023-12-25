@@ -1,4 +1,4 @@
-import { IDiary } from "../../screens/DiaryDay/types";
+import { IDiary } from '../../screens/DiaryDay/types';
 
 const data: IDiary = {
   '2023-11-28': [

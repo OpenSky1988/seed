@@ -1,5 +1,5 @@
-import { I18nConfig } from "@ui-kitten/components";
-import { TLanguage } from "../types";
+import { I18nConfig } from '@ui-kitten/components';
+import { TLanguage } from '../types';
 
 const calendarTranslation: { [key in TLanguage]: I18nConfig } = {
   en: {
