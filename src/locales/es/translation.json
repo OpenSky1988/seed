@@ -6,6 +6,7 @@
   },
   "diary_screen": {
     "screen_title": "Diario",
+    "go_to_export_button": "Compartir",
     "export_button": "Exportar"
   },
   "settings": {

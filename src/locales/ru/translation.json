@@ -6,6 +6,7 @@
   },
   "diary_screen": {
     "screen_title": "Дневник",
+    "go_to_export_button": "Поделиться",
     "export_button": "Экспорт"
   },
   "settings": {

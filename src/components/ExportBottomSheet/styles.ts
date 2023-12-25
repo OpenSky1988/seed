@@ -1,22 +1,24 @@
 import { ThemeType } from '@ui-kitten/components';
 
 const styles = (theme: ThemeType) => ({
-  contentContainer: {
-    backgroundColor: theme['background-basic-color-1'],
-    flex: 1,
+  calendar: {
+    borderColor: 'transparent'
+  },
+  exportButtonContainer: {
     alignItems: 'center',
+    display: 'flex',
+    flex: 1,
+    justifyContent: 'flex-end',
+    minHeight: 160,
+    paddingBottom: 152,
   },
-  handle: {
-    borderTopLeftRadius: 14,
-    borderTopRightRadius: 14,
-    backgroundColor: theme['background-basic-color-1'],
-  },
-  handleIndicator: {
-    backgroundColor: theme['text-basic-color'],
-  },
-  bottomSheet: {
-    borderTopLeftRadius: 14,
-    borderTopRightRadius: 14,
+  exportButton: {
+    display: 'flex',
+    alignItems: 'center',
+    paddingVertical: 20,
+    marginTop: 24,
+    borderRadius: 16,
+    width: '100%'
   },
 });
 

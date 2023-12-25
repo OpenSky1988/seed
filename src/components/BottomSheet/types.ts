@@ -3,9 +3,8 @@ import type { BottomSheetModalMethods } from '@gorhom/bottom-sheet/lib/typescrip
 import type { ThemedComponentProps } from '@ui-kitten/components';
 import type { RefObject } from 'react';
 
-type IExportBottomSheet = Omit<BottomSheetProps, 'children'> & ThemedComponentProps<{}> & {
+type IBottomSheet = BottomSheetProps & ThemedComponentProps<{}> & {
   innerRef: RefObject<BottomSheetModalMethods>;
-  onClose: () => void;
 };
 
-export type { IExportBottomSheet };
+export type { IBottomSheet };

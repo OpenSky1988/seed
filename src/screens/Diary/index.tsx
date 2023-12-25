@@ -98,7 +98,7 @@ const Diary: React.FC<TNavigationProps> = ({ navigation, eva }) => {
           style={eva?.style?.exportButtonContainer}
         >
           <Button onPress={handleExport} style={eva?.style?.exportButton}>
-            {t('diary_screen.export_button')}
+            {t('diary_screen.go_to_export_button')}
           </Button>
         </TouchableOpacity>
       </Layout>
