@@ -1,6 +1,6 @@
 import Clipboard from '@react-native-clipboard/clipboard';
 import { Button, CalendarRange, NativeDateService, RangeCalendar, withStyles } from '@ui-kitten/components';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
@@ -12,6 +12,7 @@ import calendarTranslation from '../../locales/calendar';
 import { RootState } from '../../store';
 import { IDiary, IDiaryEntry } from '../../screens/DiaryDay/types';
 import { formatDisplayDate } from '../DateDisplay/utils';
+import { useFocusEffect } from '@react-navigation/native';
 
 const categoryEmoji = {
   breakfast: '🍳',
@@ -86,6 +87,7 @@ ${formatMeal(diary, dateStr as string)}
     const endDate = (range.endDate as Date).toISOString().split('T')[0];
 
     Clipboard.setString(prepareDates(diary, startDate, endDate));
+    setRange({});
     props.onClose();
   };
 
@@ -102,6 +104,7 @@ ${formatMeal(diary, dateStr as string)}
     const formattedDate = `${year}-${formattedMonth}-${formattedDay}`;
 
     Clipboard.setString(prepareDates(diary, formattedDate, formattedDate));
+    setRange({});
     props.onClose();
   };
 
