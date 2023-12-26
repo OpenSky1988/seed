@@ -48,7 +48,7 @@
       "name": "Название",
       "name_placeholder": "Введите название блюда",
       "category": "Категория",
-      "fulfillment": "Удовлетворённость",
+      "fulfillment": "Насыщение",
       "hunger": "Голод",
       "notes": "Заметки",
       "notes_placeholder": "Дополнительные заметки",
