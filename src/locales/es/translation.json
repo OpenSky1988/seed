@@ -7,7 +7,13 @@
   "diary_screen": {
     "screen_title": "Diario",
     "go_to_export_button": "Compartir",
-    "export_button": "Exportar"
+    "export_button": "Exportar",
+    "export_today_button": "Exportar Hoy",
+    "no_record": "No hay entrada",
+    "alert": {
+      "head": "Diario Copiado",
+      "body": "Ahora puede pegar esta selección como un mensaje de texto"
+    }
   },
   "settings": {
     "screen_title": "Ajustes",

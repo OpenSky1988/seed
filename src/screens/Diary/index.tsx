@@ -12,7 +12,7 @@ import {
 import { CalendarDateInfo } from '@ui-kitten/components/ui/calendar/type';
 import React, { useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { StyleProp, TextProps, TouchableOpacity, View, ViewStyle } from 'react-native';
+import { Alert, StyleProp, TextProps, TouchableOpacity, View, ViewStyle } from 'react-native';
 import { useSelector } from 'react-redux';
 
 import styles from './styles';
@@ -77,6 +77,7 @@ const Diary: React.FC<TNavigationProps> = ({ navigation, eva }) => {
   const handleExport = () => sheetRef.current?.present();
   const handleClose = useCallback(() => {
     sheetRef.current?.close();
+    Alert.alert(t('diary_screen.alert.head'), t('diary_screen.alert.body'));
   }, []);
 
 

@@ -11,13 +11,13 @@ const styles = (theme: ThemeType) => ({
     justifyContent: 'flex-end',
     minHeight: 160,
     paddingBottom: 152,
+    paddingHorizontal: 24,
+    width: '100%',
   },
   exportButton: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingVertical: 20,
-    marginTop: 24,
     borderRadius: 16,
+    marginTop: 24,
+    paddingVertical: 20,
     width: '100%'
   },
 });
