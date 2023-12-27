@@ -82,7 +82,7 @@ ${formatMeal(diary, dateStr as string)}
 
   const handleSelect = (nextRange: CalendarRange<Date>) => setRange(nextRange);
 
-  const handleExport = () => {
+  const handleExportRange = () => {
     const startDate = (range.startDate as Date).toISOString().split('T')[0];
     const endDate = (range.endDate as Date).toISOString().split('T')[0];
 
@@ -117,13 +117,13 @@ ${formatMeal(diary, dateStr as string)}
         style={eva?.style?.calendar}
       />
       <TouchableOpacity
-        onPress={handleExport}
+        onPress={handleExportRange}
         style={eva?.style?.exportButtonContainer}
       >
         <Button onPress={handleExportToday} style={eva?.style?.exportButton}>
           {t('diary_screen.export_today_button')}
         </Button>
-        <Button disabled={!range.endDate} onPress={handleExport} style={eva?.style?.exportButton}>
+        <Button disabled={!range.endDate} onPress={handleExportRange} style={eva?.style?.exportButton}>
           {t('diary_screen.export_button')}
         </Button>
       </TouchableOpacity>

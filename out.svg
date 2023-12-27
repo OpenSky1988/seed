@@ -1,0 +1,235 @@
+<svg version="1.1" baseProfile="full" width="2143.0" height="246.0" viewbox="0 0 2143 246" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+[&lt;type&gt;TRootStackParamList|+Diary: undefined;+DiaryDay: { day?: string \| undefined; };+Entry: { entry?: IDiaryEntry \| undefined; };+Today: { day?: string \| undefined; };+Settings: undefined|]
+[&lt;interface&gt;ILevelButtonSwitchProps|+selectedIndex: number;+setSelectedIndex: (index: number) =&gt; void;+levels: number\[\];+label: string|]
+[&lt;interface&gt;IDateDisplayProps|+date?: string|]
+[&lt;type&gt;TMealButton|+diaryEntry: IDiaryEntry;+imageUri: string \| undefined|]
+[&lt;interface&gt;IDiaryEntry|+id: string;+category: TMealCategories;+created_at: string;+fulfillment: number;+hunger: number;+imageUri?: string;+name: string;+notes: string;+time: string|]
+[&lt;interface&gt;IDiary||]
+[&lt;type&gt;DiaryDateState|+entry: IDiaryEntry\[\]|]
+[&lt;interface&gt;SettingsState|+language: TLanguage;+themeMode: TThemeMode|]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="246.0" width="2143.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)">
+<g data-name="TRootStackParamList">
+<g fill="lightgray" stroke="#33322E" data-name="TRootStackParamList">
+<rect x="0.0" y="7.5" height="175.0" width="329.0" data-name="TRootStackParamList"></rect>
+<path d="M0.0 38.5 L329.0 38.5" fill="none" data-name="TRootStackParamList"></path>
+<path d="M0.0 174.5 L329.0 174.5" fill="none" data-name="TRootStackParamList"></path>
+</g>
+<g transform="translate(0, 7.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TRootStackParamList">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TRootStackParamList">
+<a id="src/types/index.ts.TRootStackParamList" xlink:href="src/types/index.ts"><text x="156.5" y="13.5" stroke="none" text-anchor="middle" data-name="TRootStackParamList">TRootStackParamList</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 38.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TRootStackParamList">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TRootStackParamList">
+<text x="0.0" y="13.5" stroke="none" data-name="TRootStackParamList">+Diary: undefined</text>
+<text x="0.0" y="28.5" stroke="none" data-name="TRootStackParamList">+DiaryDay: { day?: string | undefined</text>
+<text x="0.0" y="43.5" stroke="none" data-name="TRootStackParamList">}</text>
+<text x="0.0" y="58.5" stroke="none" data-name="TRootStackParamList">+Entry: { entry?: IDiaryEntry | undefined</text>
+<text x="0.0" y="73.5" stroke="none" data-name="TRootStackParamList">}</text>
+<text x="0.0" y="88.5" stroke="none" data-name="TRootStackParamList">+Today: { day?: string | undefined</text>
+<text x="0.0" y="103.5" stroke="none" data-name="TRootStackParamList">}</text>
+<text x="0.0" y="118.5" stroke="none" data-name="TRootStackParamList">+Settings: undefined</text>
+
+</g>
+</g>
+<g transform="translate(0, 174.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TRootStackParamList">
+<g transform="translate(8, 8)" fill="#33322E" data-name="TRootStackParamList">
+
+</g>
+</g>
+</g>
+<g data-name="ILevelButtonSwitchProps">
+<g fill="lightblue" stroke="#33322E" data-name="ILevelButtonSwitchProps">
+<rect x="369.0" y="37.5" height="115.0" width="361.0" data-name="ILevelButtonSwitchProps"></rect>
+<path d="M369.0 68.5 L730.0 68.5" fill="none" data-name="ILevelButtonSwitchProps"></path>
+<path d="M369.0 144.5 L730.0 144.5" fill="none" data-name="ILevelButtonSwitchProps"></path>
+</g>
+<g transform="translate(369, 37.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ILevelButtonSwitchProps">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="ILevelButtonSwitchProps">
+<a id="src/components/ButtonSwitch/types.ts.ILevelButtonSwitchProps" xlink:href="src/components/ButtonSwitch/types.ts"><text x="172.5" y="13.5" stroke="none" text-anchor="middle" data-name="ILevelButtonSwitchProps">ILevelButtonSwitchProps</text></a>
+
+</g>
+</g>
+<g transform="translate(369, 68.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ILevelButtonSwitchProps">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="ILevelButtonSwitchProps">
+<text x="0.0" y="13.5" stroke="none" data-name="ILevelButtonSwitchProps">+selectedIndex: number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="ILevelButtonSwitchProps">+setSelectedIndex: (index: number) =&gt; void</text>
+<text x="0.0" y="43.5" stroke="none" data-name="ILevelButtonSwitchProps">+levels: number[]</text>
+<text x="0.0" y="58.5" stroke="none" data-name="ILevelButtonSwitchProps">+label: string</text>
+
+</g>
+</g>
+<g transform="translate(369, 144.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="ILevelButtonSwitchProps">
+<g transform="translate(8, 8)" fill="#33322E" data-name="ILevelButtonSwitchProps">
+
+</g>
+</g>
+</g>
+<g data-name="IDateDisplayProps">
+<g fill="lightblue" stroke="#33322E" data-name="IDateDisplayProps">
+<rect x="770.0" y="60.0" height="70.0" width="162.0" data-name="IDateDisplayProps"></rect>
+<path d="M770.0 91.0 L932.0 91.0" fill="none" data-name="IDateDisplayProps"></path>
+<path d="M770.0 122.0 L932.0 122.0" fill="none" data-name="IDateDisplayProps"></path>
+</g>
+<g transform="translate(770, 60)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IDateDisplayProps">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IDateDisplayProps">
+<a id="src/components/DateDisplay/types.ts.IDateDisplayProps" xlink:href="src/components/DateDisplay/types.ts"><text x="73.0" y="13.5" stroke="none" text-anchor="middle" data-name="IDateDisplayProps">IDateDisplayProps</text></a>
+
+</g>
+</g>
+<g transform="translate(770, 91)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IDateDisplayProps">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="IDateDisplayProps">
+<text x="0.0" y="13.5" stroke="none" data-name="IDateDisplayProps">+date?: string</text>
+
+</g>
+</g>
+<g transform="translate(770, 122)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IDateDisplayProps">
+<g transform="translate(8, 8)" fill="#33322E" data-name="IDateDisplayProps">
+
+</g>
+</g>
+</g>
+<g data-name="TMealButton">
+<g fill="lightgray" stroke="#33322E" data-name="TMealButton">
+<rect x="972.0" y="52.5" height="85.0" width="244.0" data-name="TMealButton"></rect>
+<path d="M972.0 83.5 L1216.0 83.5" fill="none" data-name="TMealButton"></path>
+<path d="M972.0 129.5 L1216.0 129.5" fill="none" data-name="TMealButton"></path>
+</g>
+<g transform="translate(972, 52.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TMealButton">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="TMealButton">
+<a id="src/components/MealButton/types.ts.TMealButton" xlink:href="src/components/MealButton/types.ts"><text x="114.0" y="13.5" stroke="none" text-anchor="middle" data-name="TMealButton">TMealButton</text></a>
+
+</g>
+</g>
+<g transform="translate(972, 83.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TMealButton">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="TMealButton">
+<text x="0.0" y="13.5" stroke="none" data-name="TMealButton">+diaryEntry: IDiaryEntry</text>
+<text x="0.0" y="28.5" stroke="none" data-name="TMealButton">+imageUri: string | undefined</text>
+
+</g>
+</g>
+<g transform="translate(972, 129.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="TMealButton">
+<g transform="translate(8, 8)" fill="#33322E" data-name="TMealButton">
+
+</g>
+</g>
+</g>
+<g data-name="IDiaryEntry">
+<g fill="lightblue" stroke="#33322E" data-name="IDiaryEntry">
+<rect x="1256.0" y="0.0" height="190.0" width="239.0" data-name="IDiaryEntry"></rect>
+<path d="M1256.0 31.0 L1495.0 31.0" fill="none" data-name="IDiaryEntry"></path>
+<path d="M1256.0 182.0 L1495.0 182.0" fill="none" data-name="IDiaryEntry"></path>
+</g>
+<g transform="translate(1256, 0)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IDiaryEntry">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IDiaryEntry">
+<a id="src/screens/DiaryDay/types.ts.IDiaryEntry" xlink:href="src/screens/DiaryDay/types.ts"><text x="111.5" y="13.5" stroke="none" text-anchor="middle" data-name="IDiaryEntry">IDiaryEntry</text></a>
+
+</g>
+</g>
+<g transform="translate(1256, 31)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IDiaryEntry">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="IDiaryEntry">
+<text x="0.0" y="13.5" stroke="none" data-name="IDiaryEntry">+id: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="IDiaryEntry">+category: TMealCategories</text>
+<text x="0.0" y="43.5" stroke="none" data-name="IDiaryEntry">+created_at: string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="IDiaryEntry">+fulfillment: number</text>
+<text x="0.0" y="73.5" stroke="none" data-name="IDiaryEntry">+hunger: number</text>
+<text x="0.0" y="88.5" stroke="none" data-name="IDiaryEntry">+imageUri?: string</text>
+<text x="0.0" y="103.5" stroke="none" data-name="IDiaryEntry">+name: string</text>
+<text x="0.0" y="118.5" stroke="none" data-name="IDiaryEntry">+notes: string</text>
+<text x="0.0" y="133.5" stroke="none" data-name="IDiaryEntry">+time: string</text>
+
+</g>
+</g>
+<g transform="translate(1256, 182)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IDiaryEntry">
+<g transform="translate(8, 8)" fill="#33322E" data-name="IDiaryEntry">
+
+</g>
+</g>
+</g>
+<g data-name="IDiary">
+<g fill="lightblue" stroke="#33322E" data-name="IDiary">
+<rect x="1535.0" y="71.5" height="47.0" width="62.0" data-name="IDiary"></rect>
+<path d="M1535.0 102.5 L1597.0 102.5" fill="none" data-name="IDiary"></path>
+<path d="M1535.0 110.5 L1597.0 110.5" fill="none" data-name="IDiary"></path>
+</g>
+<g transform="translate(1535, 71.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IDiary">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="IDiary">
+<a id="src/screens/DiaryDay/types.ts.IDiary" xlink:href="src/screens/DiaryDay/types.ts"><text x="23.0" y="13.5" stroke="none" text-anchor="middle" data-name="IDiary">IDiary</text></a>
+
+</g>
+</g>
+<g transform="translate(1535, 102.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IDiary">
+<g transform="translate(8, 8)" fill="#33322E" data-name="IDiary">
+
+</g>
+</g>
+<g transform="translate(1535, 110.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="IDiary">
+<g transform="translate(8, 8)" fill="#33322E" data-name="IDiary">
+
+</g>
+</g>
+</g>
+<g data-name="DiaryDateState">
+<g fill="lightgray" stroke="#33322E" data-name="DiaryDateState">
+<rect x="1637.0" y="60.0" height="70.0" width="173.0" data-name="DiaryDateState"></rect>
+<path d="M1637.0 91.0 L1810.0 91.0" fill="none" data-name="DiaryDateState"></path>
+<path d="M1637.0 122.0 L1810.0 122.0" fill="none" data-name="DiaryDateState"></path>
+</g>
+<g transform="translate(1637, 60)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DiaryDateState">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="DiaryDateState">
+<a id="src/store/slices/diaryDay.ts.DiaryDateState" xlink:href="src/store/slices/diaryDay.ts"><text x="78.5" y="13.5" stroke="none" text-anchor="middle" data-name="DiaryDateState">DiaryDateState</text></a>
+
+</g>
+</g>
+<g transform="translate(1637, 91)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DiaryDateState">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="DiaryDateState">
+<text x="0.0" y="13.5" stroke="none" data-name="DiaryDateState">+entry: IDiaryEntry[]</text>
+
+</g>
+</g>
+<g transform="translate(1637, 122)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="DiaryDateState">
+<g transform="translate(8, 8)" fill="#33322E" data-name="DiaryDateState">
+
+</g>
+</g>
+</g>
+<g data-name="SettingsState">
+<g fill="lightblue" stroke="#33322E" data-name="SettingsState">
+<rect x="1850.0" y="52.5" height="85.0" width="237.0" data-name="SettingsState"></rect>
+<path d="M1850.0 83.5 L2087.0 83.5" fill="none" data-name="SettingsState"></path>
+<path d="M1850.0 129.5 L2087.0 129.5" fill="none" data-name="SettingsState"></path>
+</g>
+<g transform="translate(1850, 52.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="SettingsState">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="SettingsState">
+<a id="src/store/slices/settings.ts.SettingsState" xlink:href="src/store/slices/settings.ts"><text x="110.5" y="13.5" stroke="none" text-anchor="middle" data-name="SettingsState">SettingsState</text></a>
+
+</g>
+</g>
+<g transform="translate(1850, 83.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="SettingsState">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="SettingsState">
+<text x="0.0" y="13.5" stroke="none" data-name="SettingsState">+language: TLanguage</text>
+<text x="0.0" y="28.5" stroke="none" data-name="SettingsState">+themeMode: TThemeMode</text>
+
+</g>
+</g>
+<g transform="translate(1850, 129.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="SettingsState">
+<g transform="translate(8, 8)" fill="#33322E" data-name="SettingsState">
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>
