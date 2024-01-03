@@ -5,6 +5,7 @@ import { Text, useTheme } from '@ui-kitten/components';
 
 import styles from './styles';
 import type { TMealButton } from './types';
+import { CATEGORY_EMOJI } from '../../constants';
 
 const MealButton: React.FC<TMealButton> = ({ diaryEntry, imageUri, navigation }) => {
   const { t } = useTranslation();
@@ -35,8 +36,9 @@ const MealButton: React.FC<TMealButton> = ({ diaryEntry, imageUri, navigation })
           <View style={styles.mealButtonTitleContainer}>
             <Text
               numberOfLines={1}
-              style={[ styles.mealButtonCategory, styles.buttonText ]}>
-              {t(`diary_meal.category.${category}`)}
+              style={[ styles.mealButtonCategory, styles.buttonText ]}
+            >
+              {`${CATEGORY_EMOJI[category]} ${t(`diary_meal.category.${category}`)}`}
             </Text>
             <Text
               numberOfLines={1}

@@ -14,14 +14,15 @@ const CalendarIcon = (props: IconProps) => <Icon {...props} name='plus' />;
 
 const DiaryDay: React.FC<TNavigationProps> = (navigationProps) => {
   const { navigation, route } = navigationProps;
-
+  
+  const diary = useSelector((state: RootState) => state.diary);
+  
   const [date, setDate] = useState(formatDate(new Date()));
 
   useEffect(() => {
     setDate((route.params?.day ?? '2023-11-28') || formatDate(new Date()));
   }, [route.params?.day]);
 
-  const diary = useSelector((state: RootState) => state.diary);
 
   const handleNewMeal = () => navigation.navigate('Entry', {});
 

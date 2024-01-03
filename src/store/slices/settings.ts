@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { store } from '../../async-storage';
 import { TLanguage, TThemeMode } from '../../types';
 
-interface SettingsState {
+interface ISettings {
   language: TLanguage;
   themeMode: TThemeMode;
 }
@@ -10,7 +10,7 @@ interface SettingsState {
 const initialState = {
   language: 'en',
   themeMode: 'system',
-} as SettingsState;
+} as ISettings;
 
 const settings = createSlice({
   name: 'settings',

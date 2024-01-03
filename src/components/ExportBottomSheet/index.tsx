@@ -1,8 +1,7 @@
-import Clipboard from '@react-native-clipboard/clipboard';
 import { Button, CalendarRange, NativeDateService, RangeCalendar, withStyles } from '@ui-kitten/components';
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { TouchableOpacity } from 'react-native';
+import { Alert, Share, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 
 import styles from './styles';
@@ -12,14 +11,7 @@ import calendarTranslation from '../../locales/calendar';
 import { RootState } from '../../store';
 import { IDiary, IDiaryEntry } from '../../screens/DiaryDay/types';
 import { formatDisplayDate } from '../DateDisplay/utils';
-import { useFocusEffect } from '@react-navigation/native';
-
-const categoryEmoji = {
-  breakfast: '🍳',
-  lunch: '🥪',
-  dinner: '🍽️',
-  snack: '🍌',
-};
+import { CATEGORY_EMOJI } from '../../constants';
 
 const ExportBottomSheet: React.FC<IExportBottomSheet> = ({
   eva,
@@ -35,6 +27,11 @@ const ExportBottomSheet: React.FC<IExportBottomSheet> = ({
   const i18nConfig = calendarTranslation[language];
   const localeDateService = new NativeDateService(language, { i18n: i18nConfig, startDayOfWeek: 1 });
 
+  const handleClose = () => {
+    setRange({});
+    props.onClose();
+  };
+
   const formatMeal = (diary: IDiary, date: string) => {
     if (!diary[date as string]) {
       return `🚫 ${t('diary_screen.no_record')}`;
@@ -42,7 +39,7 @@ const ExportBottomSheet: React.FC<IExportBottomSheet> = ({
 
     return diary[date as string].reduce((list: string, meal: IDiaryEntry) => {
       return (`${list}
-${categoryEmoji[meal.category]} ${t(`diary_meal.category.${meal.category}`)} - ${meal.time}
+${CATEGORY_EMOJI[meal.category]} ${t(`diary_meal.category.${meal.category}`)} - ${meal.time}
 *** ${meal.name} ***
 🔥 ${t('entry.form.hunger')}: ${meal.hunger}
 🎉 ${t('entry.form.fulfillment')}: ${meal.fulfillment}
@@ -73,7 +70,6 @@ ${formatMeal(diary, dateStr as string)}
 --------------------------
 
 `;
-
       currentDate.setDate(currentDate.getDate() + 1);
     }
     
@@ -82,34 +78,56 @@ ${formatMeal(diary, dateStr as string)}
 
   const handleSelect = (nextRange: CalendarRange<Date>) => setRange(nextRange);
 
-  const handleExportRange = () => {
+  const handleExportRange = async () => {
+    if (!range.endDate) return null;
+
     const startDate = (range.startDate as Date).toISOString().split('T')[0];
     const endDate = (range.endDate as Date).toISOString().split('T')[0];
 
-    Clipboard.setString(prepareDates(diary, startDate, endDate));
-    setRange({});
-    props.onClose();
+    const message = prepareDates(diary, startDate, endDate);
+    const title = `${startDate} ${endDate}`;
+
+    try {
+      const result = await Share.share({ message, title }, { subject: title });
+
+      if (result.action === Share.sharedAction) {
+        handleClose();
+      }
+    } catch (error: any) {
+      Alert.alert(error.message);
+    }
   };
 
-  const handleExportToday = () => {
+  const handleExportToday = async () => {
     const now = new Date();
-
     const year = now.getFullYear();
     const month = now.getMonth() + 1;
     const day = now.getDate();
 
     const formattedMonth = month < 10 ? `0${month}` : month;
     const formattedDay = day < 10 ? `0${day}` : day;
-
     const formattedDate = `${year}-${formattedMonth}-${formattedDay}`;
 
-    Clipboard.setString(prepareDates(diary, formattedDate, formattedDate));
-    setRange({});
-    props.onClose();
+    const message = prepareDates(diary, formattedDate, formattedDate);
+    const title = formattedDate;
+    
+    try {
+      const result = await Share.share({ message, title }, { subject: title });
+
+      if (result.action === Share.sharedAction) {
+        handleClose();
+      }
+    } catch (error: any) {
+      Alert.alert(error.message);
+    }
   };
 
   return (
-    <BottomSheet innerRef={innerRef} {...props}>
+    <BottomSheet
+      innerRef={innerRef}
+      {...props}
+      onDismiss={handleClose}
+    >
       <RangeCalendar
         dateService={localeDateService}
         onSelect={handleSelect}

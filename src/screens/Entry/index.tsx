@@ -151,16 +151,16 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
           </Select>
 
           <ButtonSwitch
-            label={t('entry.form.fulfillment')}
-            levels={sensationLevels}
-            selectedIndex={fulfillment}
-            setSelectedIndex={setFulfillment}
-          />
-          <ButtonSwitch
             label={t('entry.form.hunger')}
             levels={sensationLevels}
             selectedIndex={hunger}
             setSelectedIndex={setHunger}
+          />
+          <ButtonSwitch
+            label={t('entry.form.fulfillment')}
+            levels={sensationLevels}
+            selectedIndex={fulfillment}
+            setSelectedIndex={setFulfillment}
           />
 
           <Button
