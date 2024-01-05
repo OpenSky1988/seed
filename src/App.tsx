@@ -14,8 +14,8 @@ import { RootState } from './store';
 import { setDiary } from './store/slices/diary';
 import getTheme from './theme';
 
-import diary from './data/diary';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { DEVICE_STORE_KEYS } from './async-storage/deviceStoreKeys';
 
 const App: React.FC = () => {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     (async () => {
-      // const diary = (await get(DEVICE_STORE_KEYS.DIARY)) || [];
+      const diary = await get(DEVICE_STORE_KEYS.DIARY) || {};
       dispatch(setDiary(diary))
     })();
   }, []);

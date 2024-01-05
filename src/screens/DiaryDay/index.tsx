@@ -20,7 +20,7 @@ const DiaryDay: React.FC<TNavigationProps> = (navigationProps) => {
   const [date, setDate] = useState(formatDate(new Date()));
 
   useEffect(() => {
-    setDate((route.params?.day ?? '2023-11-28') || formatDate(new Date()));
+    setDate((route.params?.day) || formatDate(new Date()));
   }, [route.params?.day]);
 
 

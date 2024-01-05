@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { store } from '../../async-storage';
 import { TLanguage, TThemeMode } from '../../types';
+import { DEVICE_STORE_KEYS } from '../../async-storage/deviceStoreKeys';
 
 interface ISettings {
   language: TLanguage;
@@ -18,11 +19,11 @@ const settings = createSlice({
   reducers: {
     setLanguage(state, action: PayloadAction<TLanguage>) {
       state.language = action.payload;
-      store('language', action.payload);
+      store(DEVICE_STORE_KEYS.LANGUAGE, action.payload);
     },
     setThemeMode(state, action: PayloadAction<TThemeMode>) {
       state.themeMode = action.payload;
-      store('themeMode', action.payload);
+      store(DEVICE_STORE_KEYS.THEME, action.payload);
     },
   },
 });
