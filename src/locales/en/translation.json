@@ -6,14 +6,11 @@
   },
   "diary_screen": {
     "screen_title": "Diary",
-    "go_to_export_button": "Share",
-    "export_button": "Export",
-    "export_today_button": "Export Today",
-    "no_record": "No record",
-    "alert": {
-      "head": "Diary Copied",
-      "body": "You can now paste this selection as a text message"
-    }
+    "go_to_export_button": "Export",
+    "export_button": "Send",
+    "export_today_button": "Send Today",
+    "select_range": "Select Range",
+    "no_record": "No record"
   },
   "settings": {
     "screen_title": "Settings",
@@ -52,7 +49,7 @@
       "hunger": "Hunger",
       "notes": "Notes",
       "notes_placeholder": "Additional notes",
-      "submit_button": "Submit",
+      "submit_button": "Save",
       "delete_button": "Delete"
     },
     "photo_capture": {

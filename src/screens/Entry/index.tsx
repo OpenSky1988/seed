@@ -1,5 +1,5 @@
 import { useFocusEffect, useNavigation } from '@react-navigation/native';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useRef } from 'react';
 import {
   Button,
   IndexPath,
@@ -44,6 +44,7 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const scrollViewRef = useRef<ScrollView | null>(null);
   
   const sensationLevels = [1, 2, 3, 4, 5];
   const mealCategories = [
@@ -54,6 +55,7 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
   ];
 
   const [category, setCategory] = useState<IndexPath>(getCategoryIndexPath('breakfast'));
+  // If isn't today - should be that date at 12:00
   const [dateTime, setDateTime] = useState<Date>(new Date());
   const [fulfillment, setFulfillment] = useState<number>(0);
   const [hunger, setHunger] = useState<number>(0);
@@ -63,16 +65,20 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
   const [notes, setNotes] = useState<string>('');
 
   const diaryEntry = route.params?.entry;
+  const selectedDate = route.params?.date as string;
+  console.log('-== 1 ==-', selectedDate);
 
   useFocusEffect(
     useCallback(() => {
       setCategory(getCategoryIndexPath(diaryEntry?.category ?? 'breakfast'));
-      setDateTime(diaryEntry?.created_at ? new Date(diaryEntry?.created_at) : new Date());
+      setDateTime((diaryEntry?.created_at || selectedDate) ? new Date(diaryEntry?.created_at || `${selectedDate}T12:00:000`) : new Date());
       setFulfillment(diaryEntry?.fulfillment ?? 1);
       setHunger(diaryEntry?.hunger ?? 1);
-      setImageUri(diaryEntry?.imageUri ?? '');
+      setImageUri(diaryEntry?.imageUri ?? undefined);
       setName(diaryEntry?.name ?? '');
       setNotes(diaryEntry?.notes ?? '');
+
+      scrollViewRef.current?.scrollTo({ y: 0, animated: false });
     }, [diaryEntry]),
   );
 
@@ -127,7 +133,7 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
         alignment="center"
         title={TitleMemoized}
       />
-      <ScrollView style={eva?.style?.container}>
+      <ScrollView style={eva?.style?.container} ref={scrollViewRef}>
         <Layout style={eva?.style?.layout}>
           <PhotoCapture imageUri={imageUri} onPhotoTaken={handlePhotoTaken} />
           <Input

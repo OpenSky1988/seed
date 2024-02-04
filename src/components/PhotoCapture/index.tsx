@@ -50,13 +50,17 @@ const PhotoCapture: React.FC<IPhotoCapture> = ({ eva, imageUri, onPhotoTaken }) 
   return (
     <View>
       <TouchableOpacity onPress={handleOpenActionSheet} style={{ width: '100%' }}>
-        <ImageBackground
-          imageStyle={{ borderRadius: eva?.style?.preview.borderRadius }}
-          source={{ uri: imageUri || undefined }}
-          style={eva?.style?.preview}
-        >
-          <ThemedCameraIcon hasImage={!!imageUri} />
-        </ImageBackground>
+        {imageUri ? (
+          <ImageBackground
+            imageStyle={{ borderRadius: eva?.style?.preview.borderRadius }}
+            source={{ uri: imageUri }}
+            style={eva?.style?.preview}
+          />
+        ) : (
+          <View style={eva?.style?.preview}>
+            <ThemedCameraIcon hasImage={false} />
+          </View>
+        )}
       </TouchableOpacity>
     </View>
   );

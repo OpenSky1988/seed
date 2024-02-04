@@ -24,7 +24,7 @@ const DiaryDay: React.FC<TNavigationProps> = (navigationProps) => {
   }, [route.params?.day]);
 
 
-  const handleNewMeal = () => navigation.navigate('Entry', {});
+  const handleNewMeal = () => navigation.navigate('Entry', { date });
 
   return (
     <>

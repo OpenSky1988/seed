@@ -12,7 +12,9 @@ const darkColorOverrides = {
 
 const getTheme = (colorScheme: 'light' | 'dark', themeMode: TThemeMode) => {
   const currentTheme = eva[themeMode === 'system' ? colorScheme : themeMode];
-  const customTheme = themeMode === 'dark' ? { ...theme, ...darkColorOverrides } : theme;
+  const customTheme = (themeMode === 'system' && colorScheme === 'dark') || themeMode === 'dark'
+    ? { ...theme, ...darkColorOverrides }
+    : theme;
 
   return { ...currentTheme, ...customTheme };
 };

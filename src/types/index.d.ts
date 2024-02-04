@@ -9,6 +9,7 @@ type TRootStackParamList = {
   };
   Entry: {
     entry?: IDiaryEntry;
+    date?: string;
   };
   Today: {
     day?: string;

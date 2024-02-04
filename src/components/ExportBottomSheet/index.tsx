@@ -142,7 +142,7 @@ ${formatMeal(diary, dateStr as string)}
           {t('diary_screen.export_today_button')}
         </Button>
         <Button disabled={!range.endDate} onPress={handleExportRange} style={eva?.style?.exportButton}>
-          {t('diary_screen.export_button')}
+          {range.endDate ? t('diary_screen.export_button') : t('diary_screen.select_range')}
         </Button>
       </TouchableOpacity>
     </BottomSheet>
