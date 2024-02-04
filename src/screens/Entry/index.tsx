@@ -66,7 +66,6 @@ const Entry: React.FC<TNavigationProps> = ({ eva, route }) => {
 
   const diaryEntry = route.params?.entry;
   const selectedDate = route.params?.date as string;
-  console.log('-== 1 ==-', selectedDate);
 
   useFocusEffect(
     useCallback(() => {
